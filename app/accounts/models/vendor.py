@@ -5,10 +5,11 @@ class Vendor(models.Model):
     user = models.OneToOneField('auth.User',
                                 on_delete=models.CASCADE,
                                 verbose_name='کاربر')
-    name = models.CharField(max_length=64,
+    name = models.CharField(max_length=100,
                             verbose_name='نام')
     logo = models.ImageField(upload_to='resources/images/vendors',
                              null=True,
+                             blank=True,
                              verbose_name='لوگو')
     credit = models.CharField(max_length=50,
                               default='0',

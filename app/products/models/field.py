@@ -15,3 +15,6 @@ class Field(models.Model):
             models.UniqueConstraint(fields=['name', 'category'],
                                     name='unique_field')
         ]
+
+    def __str__(self):
+        return self.name
