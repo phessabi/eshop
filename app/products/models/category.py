@@ -18,4 +18,3 @@ class Category(models.Model):
     class Meta:
         verbose_name = 'دسته'
         verbose_name_plural = 'دسته‌ها'
-
