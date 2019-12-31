@@ -1,5 +1,11 @@
-from django.urls import path
+from django.urls import path, include
+from rest_framework import routers
+
+from accounts.views.vendor import CreateUser
+
+router = routers.DefaultRouter()
+router.register('register', CreateUser)
 
 urlpatterns = [
-    # path('create-dashboard/', views.CreateDashboard.as_view())
+    path('', include(router.urls))
 ]
