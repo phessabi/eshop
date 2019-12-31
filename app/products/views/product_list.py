@@ -1,3 +1,4 @@
+from rest_framework import filters
 from rest_framework.mixins import ListModelMixin
 from rest_framework.permissions import AllowAny
 from rest_framework.viewsets import GenericViewSet
@@ -10,3 +11,5 @@ class ListProductViewSet(GenericViewSet, ListModelMixin):
     permission_classes = (AllowAny,)
     queryset = Product.objects.all()
     serializer_class = ProductSerializer
+    filter_backends = [filters.SearchFilter]
+    search_fields = ['title']
