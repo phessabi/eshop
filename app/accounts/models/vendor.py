@@ -29,3 +29,6 @@ class Vendor(models.Model):
     class Meta:
         verbose_name = 'فروشنده'
         verbose_name_plural = 'فروشندگان'
+
+    def __str__(self):
+        return self.name
