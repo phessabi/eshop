@@ -6,7 +6,7 @@ from products.models import Product
 from products.serializers import ProductSerializer
 
 
-class ListRetrieveProductViewSet(GenericViewSet, ListModelMixin):
+class ListProductViewSet(GenericViewSet, ListModelMixin):
     permission_classes = (AllowAny,)
     queryset = Product.objects.all()
     serializer_class = ProductSerializer
