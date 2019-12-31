@@ -6,4 +6,4 @@ from accounts.models import Vendor
 class VendorSerializer(serializers.ModelSerializer):
     class Meta:
         model = Vendor
-        fields = ('user', 'name', 'credit')
+        fields = ('id', 'name')
