@@ -10,7 +10,6 @@ class Vendor(models.Model):
 
     name = models.CharField(
         max_length=100,
-        null=True,
         verbose_name='نام'
     )
 
