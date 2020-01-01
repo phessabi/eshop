@@ -9,7 +9,7 @@ from products.models import Product
 from products.serializers import ProductSerializer
 
 
-class ProductCreateViewSet(GenericViewSet, CreateAPIView, ListAPIView):
+class VendorProductViewSet(GenericViewSet, CreateAPIView, ListAPIView):
     permission_classes = (IsAuthenticated, IsVendor)
     serializer_class = ProductSerializer
     queryset = Product.objects.all()
