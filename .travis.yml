@@ -1,0 +1,11 @@
+language: python
+
+python:
+  - "3.6"
+
+install:
+  - pip install -r app/requirements.txt
+
+script:
+  - export PYTHONUNBUFFERED=1
+  - travis wait 20 python app/manage.py test app
