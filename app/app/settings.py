@@ -60,9 +60,10 @@ REST_FRAMEWORK = {
     ]
 }
 
-CORS_ORIGIN_WHITELIST = [
-    'http://localhost:4200',
-]
+# CORS_ORIGIN_WHITELIST = [
+#     'http://localhost:4200',
+# ]
+CORS_ORIGIN_ALLOW_ALL = True
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
