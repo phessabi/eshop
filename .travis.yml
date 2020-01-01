@@ -3,13 +3,5 @@ language: python
 python:
   - "3.6"
 
-before_install:
-  - sudo apt-get update
-  - sudo apt-get -y install libxml2-dev
-
 install:
-  - pip install -r app/requirements.txt
-
-script:
-  - export PYTHONUNBUFFERED=1
-  - python app/manage.py test app
+  - docker-compose up --build
