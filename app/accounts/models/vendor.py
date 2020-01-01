@@ -20,9 +20,8 @@ class Vendor(models.Model):
         verbose_name='لوگو'
     )
 
-    credit = models.CharField(
-        max_length=50,
-        default='0',
+    credit = models.IntegerField(
+        default=0,
         verbose_name='اعتبار'
     )
 

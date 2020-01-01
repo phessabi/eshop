@@ -21,8 +21,7 @@ class Product(models.Model):
         verbose_name='تصویر'
     )
 
-    price = models.CharField(
-        max_length=50,
+    price = models.IntegerField(
         verbose_name='قیمت'
     )
 
