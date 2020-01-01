@@ -25,7 +25,7 @@ SECRET_KEY = '3w!0h3#&6hwc96f$m2l3+4a_vp9y)odh15if=x4v6f3_+(ux1e'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['127.0.0.1']
 
 
 # Application definition
@@ -59,6 +59,10 @@ REST_FRAMEWORK = {
         'rest_framework.parsers.JSONParser',
     ]
 }
+
+CORS_ORIGIN_WHITELIST = [
+    'http://localhost:4200',
+]
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
