@@ -4,4 +4,4 @@ python:
   - "3.6"
 
 install:
-  - docker-compose up --build
+  - docker-compose up --build --build-arg ISTEST=1
