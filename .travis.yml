@@ -12,4 +12,4 @@ install:
 
 script:
   - export PYTHONUNBUFFERED=1
-  - travis wait 20 python app/manage.py test app
+  - travis wait 200 python app/manage.py test app
