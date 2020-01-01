@@ -1,2 +1,2 @@
 from .product_list import ListProductViewSet
-from .product_create import ProductCreateView
+from .product_create import ProductCreateViewSet

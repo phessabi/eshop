@@ -3,7 +3,7 @@ from rest_framework.permissions import AllowAny
 from rest_framework.viewsets import GenericViewSet
 
 from products.models import Field
-from products.serializers.field import FieldSerializer
+from products.serializers import FieldSerializer
 
 
 class ListRetrieveFieldViewSet(GenericViewSet, ListAPIView, RetrieveAPIView):
