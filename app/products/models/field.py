@@ -10,18 +10,14 @@ class Field(models.Model):
     category = models.ForeignKey(
         'products.Category',
         on_delete=models.CASCADE,
+        related_name='fields',
         verbose_name='دسته'
     )
 
     class Meta:
         verbose_name = 'فیلد'
         verbose_name_plural = 'فیلدها'
-        constraints = [
-            models.UniqueConstraint(
-                fields=['name', 'category'],
-                name='unique_field'
-            )
-        ]
+        unique_together = ['name', 'category']
 
     def __str__(self):
         return self.name
