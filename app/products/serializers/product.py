@@ -6,7 +6,7 @@ class ProductSerializer(serializers.ModelSerializer):
     class Meta:
         model = Product
         fields = ('id', 'title', 'category', 'price', 'express', 'deleted')
-        read_only_fields = ('id',)
+        read_only_fields = ('id', 'deleted')
 
     def create(self, validated_data):
         validated_data['vendor'] = self.context.get('vendor')
