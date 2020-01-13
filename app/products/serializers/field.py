@@ -6,3 +6,4 @@ class FieldSerializer(serializers.ModelSerializer):
     class Meta:
         model = Field
         fields = ('id', 'name', 'category')
+        read_only_fields = ('id', )
