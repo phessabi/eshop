@@ -38,6 +38,11 @@ class Product(models.Model):
         verbose_name='فروشنده'
     )
 
+    archived = models.BooleanField(
+        default=False,
+        verbose_name='حذف شده'
+    )
+
     class Meta:
         verbose_name = 'محصول'
         verbose_name_plural = 'محصولات'
