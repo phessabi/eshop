@@ -6,6 +6,7 @@ from products.models import Field
 from products.serializers import FieldSerializer
 
 
+# TODO remove this view set
 class ListRetrieveFieldViewSet(GenericViewSet, ListAPIView, RetrieveAPIView):
     permission_classes = (AllowAny,)
     queryset = Field.objects.all()

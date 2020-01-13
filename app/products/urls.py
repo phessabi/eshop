@@ -1,8 +1,7 @@
 from django.urls import path, include
 from rest_framework import routers
 
-from products.views import ListProductViewSet
-from products.views import VendorProductViewSet
+from products.views import ListProductViewSet, VendorProductViewSet
 
 router = routers.DefaultRouter()
 router.register('list-products', ListProductViewSet)
