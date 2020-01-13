@@ -10,3 +10,6 @@ class CategorySerializer(serializers.ModelSerializer):
         model = Category
         fields = ('id', 'name', 'level', 'parent_category', 'fields')
         read_only_fields = ('id', 'fields')
+        extra_kwargs = {
+            'parent_category': {'required': False}
+        }
