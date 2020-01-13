@@ -9,3 +9,4 @@ class CategorySerializer(serializers.ModelSerializer):
     class Meta:
         model = Category
         fields = ('id', 'name', 'level', 'parent_category', 'fields')
+        read_only_fields = ('id', 'fields')
