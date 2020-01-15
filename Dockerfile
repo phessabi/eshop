@@ -3,6 +3,7 @@ ENV PYTHONUNBUFFERED 1
 RUN mkdir /code
 WORKDIR /code
 COPY app/requirements.txt /code/
+
 RUN apk --update add gcc libxml2-dev libxslt-dev libffi-dev musl-dev libgcc openssl-dev curl
 RUN apk add bash libpng-dev freetype-dev jpeg-dev zlib-dev lcms2-dev openjpeg-dev
 RUN pip install --upgrade pip
