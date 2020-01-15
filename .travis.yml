@@ -4,7 +4,7 @@ python:
   - "3.6"
 
 install:
-  - TEST=1 sudo -E docker-compose up --build
+  - sudo docker-compose up -d migration app
 
 script:
-  - echo "Test Completed!"
+  - sudo docker-compose run test
