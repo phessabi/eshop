@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'accounts',
     'products',
+    'phonenumber_field',
     'rest_framework',
     'rest_framework.authtoken',
     'rest_framework_simplejwt',

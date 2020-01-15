@@ -1,6 +1,5 @@
 from django.contrib.auth.models import User
 from django.test import TestCase
-from django.urls import reverse
 
 from accounts.models import Vendor
 from products.models import Category, Product
@@ -26,48 +25,60 @@ class ProductAPITestCase(TestCase):
         self.category_id = category.id
         self.vendor_id = vendor.id
 
-    def test_api_authentication(self):
-        data = {
-            'title': 'new_prod',
-            'category': self.category_id,
-            'price': 100,
-            'vendor': self.vendor_id
-        }
-        response = self.client.post(reverse('vendor-products'), data, content_type='application/json')
+    # def test_api_authentication(self):
+    #     data = {
+    #         'title': 'new_prod',
+    #         'category': self.category_id,
+    #         'price': 100,
+    #         'vendor': self.vendor_id
+    #     }
+    #     response = self.client.post('http://0.0.0.0:8000/products/vendor-product/', data, content_type='application/json')
+    #
+    #     self.assertEqual(response.status_code, 201)
 
-        self.assertEqual(response.status_code, 201)
+    # def test_product_post(self):
+    #     data = {
+    #         'title': 'new_prod',
+    #         'category': self.category_id,
+    #         'price': 100,
+    #         'vendor': self.vendor_id
+    #     }
+    #     self.client.login(username='user_1', password='1234')
+    #     response = self.client.post('http://0.0.0.0:8000/products/vendor-product/', data, content_type='application/json')
+    #     content = response.json()
+    #     self.assertEqual(response.status_code, 201)
+    #     self.assertEqual(Product.objects.count(), 4)
+    #
+    #     category_id = content['category']
+    #     category = Category.objects.get(id=category_id)
+    #
+    #     vendor_id = content['vendor']
+    #     vendor = Vendor.objects.get(id=vendor_id)
+    #
+    #     self.assertEqual(vendor.product_set.count(), 4)
+    #     self.assertEqual(category.product_set.count(), 4)
+    #     self.assertEqual(content['title'], 'new_prod')
+    #     self.assertEqual(content['price'], 100)
 
-    def test_product_post(self):
-        data = {
-            'title': 'new_prod',
-            'category': self.category_id,
-            'price': 100,
-            'vendor': self.vendor_id
-        }
-        self.client.login(username='user_1', password='1234')
-        response = self.client.post(reverse('vendor-products-list'), data, content_type='application/json')
+    # def test_product_list(self):
+    #     self.client.login(username='user_1', password='1234')
+    #     response = self.client.get('http://0.0.0.0:8000/products/vendor-product/')
+    #     content = response.json()
+    #     self.assertEqual(response.status_code, 200)
+    #     self.assertEqual(len(content), 3)
+    #     for i in range(3):
+    #         product_detail = content[i]
+    #         self.assertEqual(product_detail['price'], 500)
+    #         self.assertEqual(product_detail['title'], f'product_{i + 1}')
+
+    def test_category_list(self):
+        response = self.client.get('http://0.0.0.0:8000/products/list-categories/')
         content = response.json()
-        self.assertEqual(response.status_code, 201)
-        self.assertEqual(Product.objects.count(), 4)
-
-        category_id = content['category']
-        category = Category.objects.get(id=category_id)
-
-        vendor_id = content['vendor']
-        vendor = Vendor.objects.get(id=vendor_id)
-
-        self.assertEqual(vendor.product_set.count(), 4)
-        self.assertEqual(category.product_set.count(), 4)
-        self.assertEqual(content['title'], 'new_prod')
-        self.assertEqual(content['price'], 100)
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(len(content), 1)
 
     def test_product_list(self):
-        self.client.login(username='user_1', password='1234')
-        response = self.client.get(reverse('vendor-products-list'))
+        response = self.client.get('http://0.0.0.0:8000/products/list-products/')
         content = response.json()
         self.assertEqual(response.status_code, 200)
         self.assertEqual(len(content), 3)
-        for i in range(3):
-            product_detail = content[i]
-            self.assertEqual(product_detail['price'], 500)
-            self.assertEqual(product_detail['title'], f'product_{i + 1}')
