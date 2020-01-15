@@ -4,4 +4,7 @@ python:
   - "3.6"
 
 install:
-  - TEST=1 sudo -E docker-compose up --build  
+  - TEST=1 sudo -E docker-compose up --build
+
+script:
+  - echo "Test Completed!"
