@@ -49,8 +49,7 @@ class ProductAPITestCase(TestCase):
         response = self.client.post(reverse('vendor-products-list'), data, content_type='application/json')
         content = response.json()
         self.assertEqual(response.status_code, 201)
-        # self.assertEqual(Product.objects.count(), 4)
-        self.assertEqual(Product.objects.count(), 5)
+        self.assertEqual(Product.objects.count(), 4)
 
         category_id = content['category']
         category = Category.objects.get(id=category_id)

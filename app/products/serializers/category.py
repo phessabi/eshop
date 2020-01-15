@@ -4,7 +4,7 @@ from products.serializers.field import FieldSerializer
 
 
 class CategorySerializer(serializers.ModelSerializer):
-    fields = FieldSerializer(many=True)
+    fields = FieldSerializer(many=True, read_only=True)
 
     class Meta:
         model = Category
@@ -16,14 +16,9 @@ class CategorySerializer(serializers.ModelSerializer):
 
     def validate(self, attrs):
         data = self.context['request'].data
-        # user = request.user
-        # custom_user = CustomUser.objects.get(user=user)
-        # user_groups = UserGroup.objects.filter(user=custom_user)
-        # groups = [ug.group for ug in user_groups]
-        # permissions = DBPermission.objects.filter(group__in=groups,
-        #                                           db=attrs['db'],
-        #                                           type='view')
-        # if len(permissions) == 0:
-        #     raise serializers.ValidationError("You do not have access to this DB")
+        category_level = data.get('level')
+        parent_category = data.get('parent_category')
+        if category_level > 1 and parent_category is None:
+            raise serializers.ValidationError("دسته‌های غیر سطح اول نیاز به دسته پدر دارند.")
         return attrs
 
