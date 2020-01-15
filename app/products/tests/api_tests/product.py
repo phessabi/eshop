@@ -19,7 +19,6 @@ class ProductAPITestCase(TestCase):
         user.save()
         vendor = Vendor.objects.create(user=user, name='vendor_1')
         category1 = Category.objects.create(name='cat_1', level=1)
-        category2 = Category.objects.create(name='cat_2', level=2, parent_category=category1)
         Product.objects.create(title='product_1', category=category1, price=500, vendor=vendor)
         Product.objects.create(title='product_2', category=category1, price=500, vendor=vendor)
         Product.objects.create(title='product_3', category=category1, price=500, vendor=vendor)
