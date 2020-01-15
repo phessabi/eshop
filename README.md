@@ -1,4 +1,5 @@
-# Eshop
+# Eshop [![Build Status](https://travis-ci.com/phessabi/eshop.svg?branch=master)](https://travis-ci.com/phessabi/eshop)
+
 Online shopping website.
 
 ---
