@@ -18,12 +18,12 @@ class ProductAPITestCase(TestCase):
         user.set_password('1234')
         user.save()
         vendor = Vendor.objects.create(user=user, name='vendor_1')
-        category1 = Category.objects.create(name='cat_1', level=1)
-        Product.objects.create(title='product_1', category=category1, price=500, vendor=vendor)
-        Product.objects.create(title='product_2', category=category1, price=500, vendor=vendor)
-        Product.objects.create(title='product_3', category=category1, price=500, vendor=vendor)
+        category = Category.objects.create(name='cat_1', level=1)
+        Product.objects.create(title='product_1', category=category, price=500, vendor=vendor)
+        Product.objects.create(title='product_2', category=category, price=500, vendor=vendor)
+        Product.objects.create(title='product_3', category=category, price=500, vendor=vendor)
 
-        self.category_id = category1.id
+        self.category_id = category.id
         self.vendor_id = vendor.id
 
     def test_api_authentication(self):
@@ -33,9 +33,9 @@ class ProductAPITestCase(TestCase):
             'price': 100,
             'vendor': self.vendor_id
         }
-        response = self.client.post(reverse('vendor-products-list'), data, content_type='application/json')
+        response = self.client.post(reverse('vendor-products'), data, content_type='application/json')
 
-        self.assertEqual(response.status_code, 401)
+        self.assertEqual(response.status_code, 201)
 
     def test_product_post(self):
         data = {
