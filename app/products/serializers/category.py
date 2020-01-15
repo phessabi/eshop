@@ -13,3 +13,17 @@ class CategorySerializer(serializers.ModelSerializer):
         extra_kwargs = {
             'parent_category': {'required': False}
         }
+
+    def validate(self, attrs):
+        data = self.context['request'].data
+        # user = request.user
+        # custom_user = CustomUser.objects.get(user=user)
+        # user_groups = UserGroup.objects.filter(user=custom_user)
+        # groups = [ug.group for ug in user_groups]
+        # permissions = DBPermission.objects.filter(group__in=groups,
+        #                                           db=attrs['db'],
+        #                                           type='view')
+        # if len(permissions) == 0:
+        #     raise serializers.ValidationError("You do not have access to this DB")
+        return attrs
+
