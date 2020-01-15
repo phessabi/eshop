@@ -5,7 +5,7 @@ from products.views import ListProductViewSet, VendorProductViewSet, ListCategor
 
 router = routers.DefaultRouter()
 router.register('list-products', ListProductViewSet)
-router.register('add-product', VendorProductViewSet, 'vendor-products')
+router.register('vendor-product', VendorProductViewSet)
 router.register('list-categories', ListCategoryView)
 router.register('admin-category', AdminCategoryViewSet)
 

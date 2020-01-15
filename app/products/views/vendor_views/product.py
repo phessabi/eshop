@@ -12,6 +12,7 @@ class VendorProductViewSet(ModelViewSet):
     authentication_classes = (JWTAuthentication, TokenAuthentication)
     permission_classes = (IsAuthenticated, IsVendor)
     serializer_class = ProductSerializer
+    queryset = Product.objects.all()
 
     def get_serializer_context(self):
         context = super().get_serializer_context()
