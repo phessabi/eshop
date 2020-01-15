@@ -1,4 +1,4 @@
-from rest_framework.generics import ListAPIView, RetrieveAPIView
+from rest_framework.mixins import ListModelMixin
 from rest_framework.permissions import AllowAny
 from rest_framework.viewsets import GenericViewSet
 
@@ -6,7 +6,7 @@ from products.models import Category
 from products.serializers import CategorySerializer
 
 
-class ListRetrieveFieldViewSet(GenericViewSet, ListAPIView, RetrieveAPIView):
+class ListCategoryView(GenericViewSet, ListModelMixin):
     permission_classes = (AllowAny,)
-    queryset = Category.objects.all()
     serializer_class = CategorySerializer
+    queryset = Category.objects.all()

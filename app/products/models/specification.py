@@ -5,6 +5,7 @@ class Specification(models.Model):
     product = models.ForeignKey(
         'products.Product',
         on_delete=models.CASCADE,
+        related_name='specifications',
         verbose_name='محصول'
     )
 
