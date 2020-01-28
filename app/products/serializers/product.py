@@ -4,7 +4,7 @@ from products.serializers.specification import SpecificationSerializer
 
 
 class ProductSerializer(serializers.ModelSerializer):
-    specifications = SpecificationSerializer(many=True)
+    specifications = SpecificationSerializer(many=True, read_only=True)
 
     class Meta:
         model = Product
