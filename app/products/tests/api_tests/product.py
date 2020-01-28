@@ -1,5 +1,6 @@
 from django.contrib.auth.models import User
 from django.test import TestCase
+from rest_framework.test import APIClient
 
 from accounts.models import Vendor
 from products.models import Category, Product
@@ -25,16 +26,26 @@ class ProductAPITestCase(TestCase):
         self.category_id = category.id
         self.vendor_id = vendor.id
 
-    # def test_api_authentication(self):
-    #     data = {
-    #         'title': 'new_prod',
-    #         'category': self.category_id,
-    #         'price': 100,
-    #         'vendor': self.vendor_id
-    #     }
-    #     response = self.client.post('http://0.0.0.0:8000/products/vendor-product/', data, content_type='application/json')
-    #
-    #     self.assertEqual(response.status_code, 201)
+    def test_api_authentication(self):
+        response = self.client.post('http://0.0.0.0:8000/accounts/token/',
+                                    {'username': 'user_1', 'password': '1234'},
+                                    content_type='application/json')
+        self.assertEqual(response.status_code, 200)
+        self.assertTrue('access' in response.data)
+        token = response.data['access']
+        client = APIClient()
+        client.credentials(HTTP_AUTHORIZATION='Bearer ' + token)
+        data = {
+            'title': 'new_prod',
+            'category': self.category_id,
+            'price': 100,
+            'vendor': self.vendor_id
+        }
+        response = self.client.post('http://0.0.0.0:8000/products/vendor-product/',
+                                    data,
+                                    content_type='application/json')
+
+        self.assertEqual(response.status_code, 201)
 
     # def test_product_post(self):
     #     data = {
@@ -71,14 +82,14 @@ class ProductAPITestCase(TestCase):
     #         self.assertEqual(product_detail['price'], 500)
     #         self.assertEqual(product_detail['title'], f'product_{i + 1}')
 
-    def test_category_list(self):
-        response = self.client.get('http://0.0.0.0:8000/products/list-categories/')
-        content = response.json()
-        self.assertEqual(response.status_code, 200)
-        self.assertEqual(len(content), 1)
-
-    def test_product_list(self):
-        response = self.client.get('http://0.0.0.0:8000/products/list-products/')
-        content = response.json()
-        self.assertEqual(response.status_code, 200)
-        self.assertEqual(len(content), 3)
+    # def test_category_list(self):
+    #     response = self.client.get('http://0.0.0.0:8000/products/list-categories/')
+    #     content = response.json()
+    #     self.assertEqual(response.status_code, 200)
+    #     self.assertEqual(len(content), 1)
+    #
+    # def test_product_list(self):
+    #     response = self.client.get('http://0.0.0.0:8000/products/list-products/')
+    #     content = response.json()
+    #     self.assertEqual(response.status_code, 200)
+    #     self.assertEqual(len(content), 3)
