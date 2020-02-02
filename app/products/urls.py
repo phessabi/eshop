@@ -7,7 +7,6 @@ router = routers.DefaultRouter()
 router.register('list-products', ListProductViewSet)
 router.register('vendor-product', VendorProductViewSet)
 router.register('list-categories', ListCategoryView)
-router.register('list', ListCategoryView)
 router.register('admin-category', AdminCategoryViewSet)
 
 urlpatterns = [
