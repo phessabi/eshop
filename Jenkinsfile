@@ -26,7 +26,6 @@ pipeline
 
             steps
             {
-                sh 'pip install -r app/requirements.txt'
                 sh 'python app/manage.py migrate'
             }
         }
