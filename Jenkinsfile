@@ -45,6 +45,7 @@ pipeline
             agent any
             steps
             {
+                sg 'echo $(who am I)'
                 sh '$(pwd)/deploy'
             }
         }
