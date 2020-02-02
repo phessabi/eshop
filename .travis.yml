@@ -4,7 +4,7 @@ python:
   - "3.6"
 
 install:
-  - sudo docker-compose up -d migration app
+  - sudo docker-compose up -d migrate app
 
 script:
   - sudo docker-compose run test
