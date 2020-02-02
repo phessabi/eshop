@@ -21,11 +21,7 @@ pipeline
         {
             agent
             {
-                docker
-                {
-                    image 'python:3.6-alpine'
-                    args '-u root:root'
-                }
+                dockerfile true
             }
 
             steps
@@ -38,11 +34,7 @@ pipeline
         {
             agent
             {
-                docker
-                {
-                    image 'python:3.6-alpine'
-                    args '-u root:root'
-                }
+                dockerfile true
             }
             steps
             {
