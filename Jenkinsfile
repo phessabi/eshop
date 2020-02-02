@@ -1,46 +1,76 @@
-pipeline {
+pipeline
+{
     agent none
 
-    environment {
+    environment
+    {
 	    PYTHONUNBUFFERED = 1
     }
 
-    stages {
-	stage('pull') {
-	    agent any
-	    steps {
-		    sh '$(pwd)/pull'
-	    }
-	}
-	stage('build') {
-	    agent { docker { image 'python:3.6-alpine' } }
-	    steps {
-		    sh 'pip install -r requirements.txt'
-		    sh 'python app/manage.py migrate'
-	    }
-	}
-	stage('test') {
-	    agent { docker { image 'python:3.6-alpine' } }
-	    steps {
-		    sh 'python app/manage.py test app'
-	    }
-	}
-	stage('deploy') {
-	    agent any
-	    steps {
-		sh '$(pwd)/deploy'
-	    }
-	}
+    stages
+    {
+        stage('pull')
+        {
+            agent any
+            steps
+            {
+                sh '$(pwd)/pull'
+            }
+        }
+        stage('build')
+        {
+            agent
+            {
+                docker
+                {
+                    image 'python:3.6-alpine'
+                    args '-u root:root'
+                }
+            }
+
+            steps
+            {
+                sh 'pip install -r requirements.txt'
+                sh 'python app/manage.py migrate'
+            }
+        }
+        stage('test')
+        {
+            agent
+            {
+                docker
+                {
+                    image 'python:3.6-alpine'
+                    args '-u root:root'
+                }
+            }
+            steps
+            {
+                sh 'python app/manage.py test app'
+            }
+        }
+        stage('deploy')
+        {
+            agent any
+            steps
+            {
+                sh '$(pwd)/deploy'
+            }
+        }
     }
 
-    post {
-        always {
+    post
+    {
+        always
+        {
             echo 'Stages Completed!'
         }
-        success {
+        success
+        {
             echo 'Passed! Deploying Changes...'
         }
-        failure {
+        failure
+        {
             echo 'Failed! Ignoring Changes...'
         }
     }
