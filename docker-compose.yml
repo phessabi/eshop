@@ -3,7 +3,7 @@ version: '3'
 services:
   makemigrations:
     build: .
-    command: bash -c "python app/manage.py makemigrations && python app/manage.py makemigrations products"
+    command: python app/manage.py makemigrations
     volumes:
       - .:/code
 
