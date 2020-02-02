@@ -6,7 +6,6 @@ services:
     command: python app/manage.py makemigrations
     volumes:
       - .:/code
-      -
 
   migrate:
     build: .
@@ -19,7 +18,6 @@ services:
     command: python app/manage.py createsuperuser
     volumes:
       - .:/code
-      -
 
   test:
     build: .
