@@ -35,6 +35,7 @@ pipeline
             agent any
             steps
             {
+                sh 'pwd'
                 sh '$(pwd)/deploy'
             }
         }
