@@ -1,5 +1,5 @@
 #!/bin/bash
 
 docker-compose -f $1/docker-compose.yml down
-sudo git -C $1 pull
+git -C $1 pull
 docker-compose -f $1/docker-compose.yml up -d migrate app
