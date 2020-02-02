@@ -5,6 +5,7 @@ pipeline
     environment
     {
 	    PYTHONUNBUFFERED = 1
+	    PRODUCT_PATH = '/home/ubuntu/eshop'
     }
 
     stages
@@ -35,8 +36,7 @@ pipeline
             agent any
             steps
             {
-                sh 'pwd'
-                sh '$(pwd)/deploy'
+                sh '${PRODUCT_PATH}/deploy'
             }
         }
     }
