@@ -36,7 +36,7 @@ pipeline
             agent any
             steps
             {
-                sh '${PRODUCT_PATH}/deploy'
+                sh '$(pwd)/deploy ${PRODUCT_PATH}'
             }
         }
     }
