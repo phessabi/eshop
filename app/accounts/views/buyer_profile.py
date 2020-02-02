@@ -3,7 +3,6 @@ from rest_framework.generics import ListAPIView, RetrieveAPIView, CreateAPIView,
 from rest_framework.permissions import AllowAny, IsAuthenticated
 from rest_framework.response import Response
 from rest_framework.viewsets import GenericViewSet
-
 from accounts.models import Vendor
 from accounts.serializers import UserSerializer, VendorProfileSerializer
 from accounts.serializers import VendorSerializer
