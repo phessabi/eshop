@@ -17,7 +17,7 @@ pipeline
                 sh '$(pwd)/pull'
             }
         }
-        stage('build')
+        stage('build and test')
         {
             agent
             {
@@ -27,16 +27,6 @@ pipeline
             steps
             {
                 sh 'python app/manage.py migrate'
-            }
-        }
-        stage('test')
-        {
-            agent
-            {
-                dockerfile true
-            }
-            steps
-            {
                 sh 'python app/manage.py test app'
             }
         }
@@ -45,7 +35,7 @@ pipeline
             agent any
             steps
             {
-                sg 'echo $(who am I)'
+                sh 'echo $(who am I)'
                 sh '$(pwd)/deploy'
             }
         }
