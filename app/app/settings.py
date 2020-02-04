@@ -29,7 +29,7 @@ DEBUG = True
 
 ALLOWED_HOSTS = ['194.5.192.129', '127.0.0.1', 'localhost']
 
-TEST2
+
 # Application definition
 
 INSTALLED_APPS = [
