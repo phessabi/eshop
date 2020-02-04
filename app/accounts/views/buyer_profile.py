@@ -6,6 +6,7 @@ from rest_framework.viewsets import GenericViewSet
 
 from accounts.models import Buyer
 from accounts.serializers import UserSerializer, BuyerProfileSerializer
+from purchase.models import Cart
 
 
 class CreateBuyerViewSet(GenericViewSet, CreateAPIView):
@@ -18,7 +19,7 @@ class CreateBuyerViewSet(GenericViewSet, CreateAPIView):
         serializer = self.get_serializer(data=data)
         serializer.is_valid(raise_exception=True)
         user = serializer.save()
-        Buyer.objects.create(user=user, name=data['name'])
+        Buyer.objects.create(user=user, name=data['name'], cart=Cart.objects.create())
         headers = self.get_success_headers(serializer.data)
         return Response(serializer.data, status=status.HTTP_201_CREATED, headers=headers)
 

@@ -9,6 +9,12 @@ class Buyer(models.Model):
         verbose_name='کاربر'
     )
 
+    cart = models.OneToOneField(
+        'purchase.Cart',
+        on_delete=models.CASCADE,
+        verbose_name='سبد خرید'
+    )
+
     name = models.CharField(
         max_length=100,
         verbose_name='نام'

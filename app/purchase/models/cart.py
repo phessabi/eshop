@@ -3,7 +3,12 @@ from django.db import models
 
 class Cart(models.Model):
 
-    products = models.ManyToManyField('products.Product')
+    products = models.ManyToManyField(
+        'products.Product',
+        verbose_name='محصول',
+        null=True,
+        blank=True
+    )
 
     class Meta:
         verbose_name = 'سبد خرید'
