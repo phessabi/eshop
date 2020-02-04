@@ -12,5 +12,4 @@ install:
   - sudo docker-compose up -d migrate app
 
 script:
-  - git --no-pager show -s --format=\%ae
   - sudo docker-compose run test
