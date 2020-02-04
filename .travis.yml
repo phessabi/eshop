@@ -3,8 +3,14 @@ language: python
 python:
   - "3.6"
 
+notifications:
+  email:
+    on_success: never # default: change
+    on_failure: always # default: always
+
 install:
   - sudo docker-compose up -d migrate app
 
 script:
+  - git --no-pager show -s --format=\%ae
   - sudo docker-compose run test
