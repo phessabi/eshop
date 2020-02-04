@@ -1,3 +1,4 @@
+from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework import filters
 from rest_framework.mixins import ListModelMixin
 from rest_framework.permissions import AllowAny
@@ -11,5 +12,6 @@ class ListProductViewSet(GenericViewSet, ListModelMixin):
     permission_classes = (AllowAny,)
     queryset = Product.objects.all()
     serializer_class = ProductSerializer
-    filter_backends = [filters.SearchFilter]
+    filter_backends = [filters.SearchFilter, DjangoFilterBackend]
     search_fields = ['title']
+    filterset_fields = ['category']
