@@ -3,8 +3,15 @@ language: python
 python:
   - "3.6"
 
+env:
+  global:
+    - COMMITTER: $(git --no-pager show -s --format=\%ae)
+
 notifications:
   email:
+    recipients:
+      - ${COMMITTER}
+      - parham.hesssabi@gmail.com
     on_success: always # default: change
     on_failure: always # default: always
 
