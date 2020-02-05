@@ -19,7 +19,8 @@ class CreateBuyerViewSet(GenericViewSet, CreateAPIView):
         serializer = self.get_serializer(data=data)
         serializer.is_valid(raise_exception=True)
         user = serializer.save()
-        Buyer.objects.create(user=user, name=data['name'], cart=Cart.objects.create())
+        cart = Cart.objects.create()
+        Buyer.objects.create(user=user, name=data['name'], cart=cart)
         headers = self.get_success_headers(serializer.data)
         return Response(serializer.data, status=status.HTTP_201_CREATED, headers=headers)
 

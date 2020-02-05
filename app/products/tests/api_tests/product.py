@@ -28,13 +28,6 @@ class ProductAPITestCase(TestCase):
         self.category_id = category.id
         self.vendor_id = vendor.id
 
-    def test_api_authentication(self):
-        response = self.client.post('/accounts/token/',
-                                    {'username': 'user_1', 'password': '1234'},
-                                    content_type='application/json')
-        self.assertEqual(response.status_code, 200)
-        self.assertTrue('access' in response.data)
-
     def test_product_post(self):
         response = self.client.post('/accounts/token/',
                                     {'username': 'user_1', 'password': '1234'},
@@ -43,7 +36,7 @@ class ProductAPITestCase(TestCase):
         client = APIClient()
         client.credentials(HTTP_AUTHORIZATION='Bearer ' + token)
         data = {
-            "title": 'new_prod',
+            'title': 'new_prod',
             'category': self.category_id,
             'price': 100,
             'vendor': self.vendor_id,
