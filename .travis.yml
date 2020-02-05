@@ -19,5 +19,5 @@ install:
   - sudo docker-compose up -d migrate app
 
 script:
-  - echo Committer: ${COMMITTER}
+  - echo ${COMMITTER}
   - sudo docker-compose run test
