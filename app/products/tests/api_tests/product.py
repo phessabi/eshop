@@ -32,7 +32,7 @@ class ProductAPITestCase(TestCase):
         response = self.client.post('/accounts/token/',
                                     {'username': 'user_1', 'password': '1234'},
                                     content_type='application/json')
-        self.assertEqual(response.status_code, 201)
+        self.assertEqual(response.status_code, 200)
         self.assertTrue('access' in response.data)
 
     def test_product_post(self):
