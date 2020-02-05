@@ -9,9 +9,9 @@ env:
 
 notifications:
   email:
-    recipients:
-      - ${COMMITTER}
-      - parham.hesssabi@gmail.com
+#    recipients:
+#      - ${COMMITTER}
+#      - parham.hesssabi@gmail.com
     on_success: always # default: change
     on_failure: always # default: always
 
@@ -19,4 +19,5 @@ install:
   - sudo docker-compose up -d migrate app
 
 script:
+  - echo 'Committer: ${COMMITTER}'
   - sudo docker-compose run test
