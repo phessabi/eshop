@@ -9,11 +9,11 @@ env:
 
 notifications:
   email:
-#    recipients:
-#      - ${COMMITTER}
-#      - parham.hesssabi@gmail.com
+    enabled: true
     on_success: always # default: change
     on_failure: always # default: always
+
+
 
 install:
   - sudo docker-compose up -d migrate app
