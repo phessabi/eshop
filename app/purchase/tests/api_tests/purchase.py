@@ -13,8 +13,6 @@ class PurchaseAPITestCase(TestCase):
 
     def __init__(self, methodName='runTest'):
         super().__init__(methodName)
-        self.category_id = None
-        self.vendor_id = None
 
     def setUp(self):
         user1 = User.objects.create(username='user_1')
@@ -31,9 +29,9 @@ class PurchaseAPITestCase(TestCase):
         self.product2 = Product.objects.create(title='product_2', category=category, price=500, vendor=vendor)
         self.product3 = Product.objects.create(title='product_3', category=category, price=500, vendor=vendor)
 
-    def test_add_cart(self):
+    def test_add_to_cart(self):
         response = self.client.post('/accounts/token/',
-                                    {'username': 'user_2', 'password': '1234'},
+                                    {'username': self.buyer.user.username, 'password': '1234'},
                                     content_type='application/json')
         token = response.data['access']
         client = APIClient()
@@ -41,9 +39,10 @@ class PurchaseAPITestCase(TestCase):
         data = {
             'id': self.product1.id
         }
-        response = client.post('/purchase/add-cart/',
-                               json.dumps(data),
-                               content_type='application/json')
+        cart_id = self.buyer.cart.id
+        response = client.put('/purchase/cart/' + str(cart_id) + '/',
+                              json.dumps(data),
+                              content_type='application/json')
 
         self.assertEqual(response.status_code, 200)
 
@@ -52,3 +51,35 @@ class PurchaseAPITestCase(TestCase):
         products = content['products']
         self.assertEqual(len(products), 1)
 
+    def test_delete_from_cart(self):
+        response = self.client.post('/accounts/token/',
+                                    {'username': self.buyer.user.username, 'password': '1234'},
+                                    content_type='application/json')
+        token = response.data['access']
+        client = APIClient()
+        client.credentials(HTTP_AUTHORIZATION='Bearer ' + token)
+        data = {
+            'id': self.product1.id
+        }
+        cart_id = self.buyer.cart.id
+        response = client.put('/purchase/cart/' + str(cart_id) + '/',
+                              json.dumps(data),
+                              content_type='application/json')
+
+        self.assertEqual(response.status_code, 200)
+
+        response = client.get('/purchase/cart/')
+        content = response.json()[0]
+        products = content['products']
+        self.assertEqual(len(products), 1)
+
+        response = client.delete('/purchase/cart/' + str(cart_id) + '/',
+                                 json.dumps(data),
+                                 content_type='application/json')
+
+        self.assertEqual(response.status_code, 204)
+
+        response = client.get('/purchase/cart/')
+        content = response.json()[0]
+        products = content['products']
+        self.assertEqual(len(products), 0)
