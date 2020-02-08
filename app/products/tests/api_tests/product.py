@@ -21,14 +21,14 @@ class ProductAPITestCase(TestCase):
         user.save()
         vendor = Vendor.objects.create(user=user, name='vendor_1')
         category = Category.objects.create(name='cat_1', level=1)
-        Product.objects.create(title='product_1', category=category, price=500, vendor=vendor)
-        Product.objects.create(title='product_2', category=category, price=500, vendor=vendor)
-        Product.objects.create(title='product_3', category=category, price=500, vendor=vendor)
+        self.product1 = Product.objects.create(title='product_1', category=category, price=500, vendor=vendor)
+        self.product2 = Product.objects.create(title='product_2', category=category, price=500, vendor=vendor)
+        self.product3 = Product.objects.create(title='product_3', category=category, price=500, vendor=vendor)
 
         self.category_id = category.id
         self.vendor_id = vendor.id
 
-    def test_product_post(self):
+    def test_add_product(self):
         response = self.client.post('/accounts/token/',
                                     {'username': 'user_1', 'password': '1234'},
                                     content_type='application/json')
@@ -85,8 +85,19 @@ class ProductAPITestCase(TestCase):
         self.assertEqual(response.status_code, 200)
         self.assertEqual(len(content), 1)
 
-    def test_product_list(self):
+    def test_buyer_product_list(self):
         response = self.client.get('/products/list-products/')
         content = response.json()
         self.assertEqual(response.status_code, 200)
         self.assertEqual(len(content), 3)
+
+    def test_delete_product(self):
+        response = self.client.post('/accounts/token/',
+                                    {'username': 'user_1', 'password': '1234'},
+                                    content_type='application/json')
+        token = response.data['access']
+        client = APIClient()
+        client.credentials(HTTP_AUTHORIZATION='Bearer ' + token)
+        response = client.delete('/products/vendor-product/' + str(self.product1.id) + '/')
+        self.assertEqual(response.status_code, 204)
+        self.assertEqual(Product.objects.filter(archived=False).count(), 2)
