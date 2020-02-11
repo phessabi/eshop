@@ -6,4 +6,4 @@ from purchase.models import Payment
 class PaymentSerializer(serializers.ModelSerializer):
     class Meta:
         model = Payment
-        fields = ('id', 'buyer', 'order', 'total_price', 'payment_date')
+        fields = ('id', 'buyer', 'order', 'total_price', 'payment_time')

@@ -12,9 +12,9 @@ class Payment(models.Model):
     )
 
     order = models.OneToOneField(
-        'products.Product',
+        'purchase.Order',
         on_delete=models.CASCADE,
-        verbose_name='محصول'
+        verbose_name='سفارش'
     )
 
     total_price = models.IntegerField(
