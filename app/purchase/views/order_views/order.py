@@ -18,17 +18,14 @@ class OrderViewSet(ModelViewSet):
         queryset = Order.objects.filter(buyer__user=user, status=2)
         return queryset
 
-    # def create(self, request, *args, **kwargs):
-    #     data = request.data
-    #     products = data.get('products')
-    #     serializer = self.get_serializer(data=data)
-    #     serializer.is_valid(raise_exception=True)
-    #     serializer.data['products'] = []
-    #     for p in products:
-    #         serializer.data['products'].append(Product.objects.get(id=p.get('id')))
-    #     self.perform_create(serializer)
-    #     headers = self.get_success_headers(serializer.data)
-    #     return Response(serializer.data, status=status.HTTP_201_CREATED, headers=headers)
-    #
-    # def perform_create(self, serializer):
-    #     serializer.save()
+    def create(self, request, *args, **kwargs):
+        data = request.data
+        products = data.get('products')
+        serializer = self.get_serializer(data=data)
+        serializer.is_valid(raise_exception=True)
+        order = serializer.save()
+        for p in products:
+            product = Product.objects.get(id=p.get('id'))
+            order.products.add(product)
+        headers = self.get_success_headers(serializer.data)
+        return Response(serializer.data, status=status.HTTP_201_CREATED, headers=headers)
