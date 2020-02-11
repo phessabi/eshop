@@ -6,7 +6,7 @@ from rest_framework.test import APIClient
 
 from accounts.models import Buyer, Vendor
 from products.models import Category, Product
-from purchase.models import Cart
+from purchase.models import Cart, Order
 
 
 class PurchaseAPITestCase(TestCase):
@@ -83,3 +83,71 @@ class PurchaseAPITestCase(TestCase):
         content = response.json()[0]
         products = content['products']
         self.assertEqual(len(products), 0)
+
+    def test_order_completion(self):
+        response = self.client.post('/accounts/token/',
+                                    {'username': self.buyer.user.username, 'password': '1234'},
+                                    content_type='application/json')
+        token = response.data['access']
+        client = APIClient()
+        client.credentials(HTTP_AUTHORIZATION='Bearer ' + token)
+        data = {
+            'buyer': self.buyer.id,
+            'products': [
+                {
+                    'id': self.product2.id
+                }
+            ],
+            'address': 'a chert address',
+            'phone_number': '09308005234',
+            'delivery_date': '2020-02-11'
+        }
+        response = client.post('/purchase/order/',
+                               json.dumps(data),
+                               content_type='application/json')
+
+        self.assertEqual(response.status_code, 201)
+        orders = Order.objects.all()
+        self.assertEqual(len(orders), 1)
+        self.assertEqual(orders[0].status, 1)
+
+    def test_payment(self):
+        response = self.client.post('/accounts/token/',
+                                    {'username': self.buyer.user.username, 'password': '1234'},
+                                    content_type='application/json')
+        token = response.data['access']
+        client = APIClient()
+        client.credentials(HTTP_AUTHORIZATION='Bearer ' + token)
+        data = {
+            'buyer': self.buyer.id,
+            'products': [
+                {
+                    'id': self.product2.id
+                }
+            ],
+            'address': 'a chert address',
+            'phone_number': '09308005234',
+            'delivery_date': '2020-02-11'
+        }
+        response = client.post('/purchase/order/',
+                               json.dumps(data),
+                               content_type='application/json')
+
+        order_id = response.data.get('id')
+        order = Order.objects.get(id=order_id)
+        data = {
+            'order': order_id,
+            'buyer': self.buyer.id,
+            'total_price': order.total_price
+        }
+        response = client.post('/purchase/payment/',
+                               json.dumps(data),
+                               content_type='application/json')
+
+        self.assertEqual(response.status_code, 201)
+
+        response = client.get('/purchase/order/')
+        self.assertEqual(len(response.data), 1)
+
+        response = client.get('/purchase/payment/')
+        self.assertEqual(len(response.data), 1)
