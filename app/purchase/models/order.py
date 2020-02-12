@@ -1,4 +1,5 @@
 from django.db import models
+from phonenumber_field.modelfields import PhoneNumberField
 
 
 class Order(models.Model):
@@ -23,8 +24,7 @@ class Order(models.Model):
         verbose_name='آدرس'
     )
 
-    phone_number = models.CharField(
-        max_length=11,
+    phone_number = PhoneNumberField(
         verbose_name='شماره تلفن'
     )
 

@@ -1,5 +1,6 @@
 Babel==2.8.0
 certifi==2019.11.28
+coverage==5.0.3
 Django==2.2.8
 django-cors-headers==3.2.0
 django-cors-middleware==1.5.0
