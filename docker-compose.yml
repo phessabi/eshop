@@ -1,21 +1,9 @@
 version: '3'
 
 services:
-  makemigrations:
-    build: .
-    command: python app/manage.py makemigrations
-    volumes:
-      - .:/code
-
   migrate:
     build: .
     command: python app/manage.py migrate
-    volumes:
-      - .:/code
-
-  createsuperuser:
-    build: .
-    command: python app/manage.py createsuperuser
     volumes:
       - .:/code
 
