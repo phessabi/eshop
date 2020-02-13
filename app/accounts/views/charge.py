@@ -4,27 +4,33 @@ from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from rest_framework.viewsets import GenericViewSet
 
-from purchase.models import Payment
-from purchase.serializers import PaymentSerializer
+from accounts.models import Charge
+from accounts.serializers import ChargeSerializer
 
 
-class PaymentView(ListCreateAPIView, GenericViewSet):
+class ChargeView(ListCreateAPIView, GenericViewSet):
     permission_classes = (IsAuthenticated,)
-    serializer_class = PaymentSerializer
-    queryset = Payment.objects.all()
+    serializer_class = ChargeSerializer
+    queryset = Charge.objects.all()
 
     def get_queryset(self):
         user = self.request.user
-        queryset = Payment.objects.filter(buyer__user=user)
+        queryset = Charge.objects.filter(user=user)
         return queryset
 
     def create(self, request, *args, **kwargs):
+        user = request.user
         data = request.data
         serializer = self.get_serializer(data=data)
         serializer.is_valid(raise_exception=True)
-        payment = serializer.save()
-        order = payment.order
-        order.status = 2
-        order.save()
+        charge = serializer.save()
+        if hasattr(user, 'vendor'):
+            user.vendor.credit += charge.amount
+            user.vendor.save()
+            user.save()
+        else:
+            user.buyer.credit += charge.amount
+            user.buyer.save()
+            user.save()
         headers = self.get_success_headers(serializer.data)
         return Response(serializer.data, status=status.HTTP_201_CREATED, headers=headers)

@@ -4,7 +4,7 @@ from rest_framework import routers
 from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
 
 from accounts.views import CreateVendorViewSet, ListRetrieveVendorViewSet, UpdateRetrieveVendorViewSet, \
-    CreateBuyerViewSet, UpdateRetrieveBuyerViewSet, GetTypeView
+    CreateBuyerViewSet, UpdateRetrieveBuyerViewSet, GetTypeView, ChargeView
 
 router = routers.DefaultRouter()
 router.register('vendor-registration', CreateVendorViewSet)
@@ -12,7 +12,7 @@ router.register('buyer-registration', CreateBuyerViewSet)
 router.register('list-vendors', ListRetrieveVendorViewSet)
 router.register('vendor-profile', UpdateRetrieveVendorViewSet)
 router.register('buyer-profile', UpdateRetrieveBuyerViewSet)
-# router.register('get-type', GetTypeView)
+router.register('charge', ChargeView)
 
 urlpatterns = [
     path('', include(router.urls)),

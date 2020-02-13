@@ -1,8 +1,10 @@
+import json
+
 from django.contrib.auth.models import User
 from django.test import TestCase
 from rest_framework.test import APIClient
 
-from accounts.models import Vendor, Buyer
+from accounts.models import Vendor, Buyer, Charge
 from purchase.models import Cart
 
 
@@ -58,3 +60,25 @@ class AccountAPITestCase(TestCase):
         response = client.get('/accounts/get-type/')
         self.assertEqual(response.status_code, 200)
         self.assertEqual(response.data.get('type'), 'vendor')
+
+    def test_charging(self):
+        response = self.client.post('/accounts/token/',
+                                    {'username': self.user2.username, 'password': '1234'},
+                                    content_type='application/json')
+
+        token = response.data['access']
+        client = APIClient()
+        client.credentials(HTTP_AUTHORIZATION='Bearer ' + token)
+
+        data = {
+            'user': self.user2.id,
+            'amount': 12000
+        }
+        response = client.post('/accounts/charge/',
+                               json.dumps(data),
+                               content_type='application/json')
+        self.assertEqual(response.status_code, 201)
+        user_id = response.data.get('user')
+        user = User.objects.get(id=user_id)
+        credit = user.buyer.credit
+        self.assertEqual(credit, 12000)
