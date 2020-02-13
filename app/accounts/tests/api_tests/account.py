@@ -82,3 +82,16 @@ class AccountAPITestCase(TestCase):
         user = User.objects.get(id=user_id)
         credit = user.buyer.credit
         self.assertEqual(credit, 12000)
+
+    def test_listing_transactions(self):
+        response = self.client.post('/accounts/token/',
+                                    {'username': self.user2.username, 'password': '1234'},
+                                    content_type='application/json')
+
+        token = response.data['access']
+        client = APIClient()
+        client.credentials(HTTP_AUTHORIZATION='Bearer ' + token)
+
+        response = client.get('/accounts/charge/')
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(len(response.data), 0)

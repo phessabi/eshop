@@ -51,6 +51,27 @@ class PurchaseAPITestCase(TestCase):
         products = content['products']
         self.assertEqual(len(products), 1)
 
+    def test_add_cart(self):
+        response = self.client.post('/accounts/token/',
+                                    {'username': self.buyer.user.username, 'password': '1234'},
+                                    content_type='application/json')
+        token = response.data['access']
+        client = APIClient()
+        client.credentials(HTTP_AUTHORIZATION='Bearer ' + token)
+        data = {
+            'id': self.product1.id
+        }
+        response = client.post('/purchase/add-cart/',
+                               json.dumps(data),
+                               content_type='application/json')
+
+        self.assertEqual(response.status_code, 200)
+
+        response = client.get('/purchase/cart/')
+        content = response.json()[0]
+        products = content['products']
+        self.assertEqual(len(products), 1)
+
     def test_delete_from_cart(self):
         response = self.client.post('/accounts/token/',
                                     {'username': self.buyer.user.username, 'password': '1234'},
@@ -83,6 +104,26 @@ class PurchaseAPITestCase(TestCase):
         content = response.json()[0]
         products = content['products']
         self.assertEqual(len(products), 0)
+
+    def test_date(self):
+        response = self.client.post('/accounts/token/',
+                                    {'username': self.buyer.user.username, 'password': '1234'},
+                                    content_type='application/json')
+        token = response.data['access']
+        client = APIClient()
+        client.credentials(HTTP_AUTHORIZATION='Bearer ' + token)
+        response = client.get('/purchase/date/')
+        self.assertEqual(response.status_code, 200)
+
+    def test_phone_address(self):
+        response = self.client.post('/accounts/token/',
+                                    {'username': self.buyer.user.username, 'password': '1234'},
+                                    content_type='application/json')
+        token = response.data['access']
+        client = APIClient()
+        client.credentials(HTTP_AUTHORIZATION='Bearer ' + token)
+        response = client.get('/purchase/phone-address/')
+        self.assertEqual(response.status_code, 200)
 
     def test_order_completion(self):
         response = self.client.post('/accounts/token/',

@@ -20,12 +20,13 @@ class ProductAPITestCase(TestCase):
         user.set_password('1234')
         user.save()
         vendor = Vendor.objects.create(user=user, name='vendor_1')
-        category = Category.objects.create(name='cat_1', level=1)
-        self.product1 = Product.objects.create(title='product_1', category=category, price=500, vendor=vendor)
-        self.product2 = Product.objects.create(title='product_2', category=category, price=500, vendor=vendor)
-        self.product3 = Product.objects.create(title='product_3', category=category, price=500, vendor=vendor)
+        category1 = Category.objects.create(name='cat_1', level=1)
+        category2 = Category.objects.create(name='cat_2', level=1)
+        self.product1 = Product.objects.create(title='product_1', category=category1, price=500, vendor=vendor)
+        self.product2 = Product.objects.create(title='product_2', category=category1, price=500, vendor=vendor)
+        self.product3 = Product.objects.create(title='product_3', category=category2, price=500, vendor=vendor)
 
-        self.category_id = category.id
+        self.category_id = category1.id
         self.vendor_id = vendor.id
 
     def test_add_product(self):
@@ -53,7 +54,7 @@ class ProductAPITestCase(TestCase):
 
         category_id = content['category']
         category = Category.objects.get(id=category_id)
-        self.assertEqual(category.product_set.count(), 4)
+        self.assertEqual(category.product_set.count(), 3)
 
         vendor_id = content['vendor']
         vendor = Vendor.objects.get(id=vendor_id)
@@ -83,13 +84,25 @@ class ProductAPITestCase(TestCase):
         response = self.client.get('/products/list-categories/')
         content = response.json()
         self.assertEqual(response.status_code, 200)
-        self.assertEqual(len(content), 1)
+        self.assertEqual(len(content), 2)
 
     def test_buyer_product_list(self):
         response = self.client.get('/products/list-products/')
         content = response.json()
         self.assertEqual(response.status_code, 200)
         self.assertEqual(len(content), 3)
+
+    def test_searching_products(self):
+        response = self.client.get('/products/list-products/?search=product_1')
+        content = response.json()
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(len(content), 1)
+
+    def test_filtering_products(self):
+        response = self.client.get('/products/list-products/?category=' + str(self.category_id))
+        content = response.json()
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(len(content), 2)
 
     def test_delete_product(self):
         response = self.client.post('/accounts/token/',
