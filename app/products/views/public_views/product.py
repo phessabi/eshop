@@ -1,17 +1,39 @@
-from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework import filters
 from rest_framework.mixins import ListModelMixin, RetrieveModelMixin
 from rest_framework.permissions import AllowAny
 from rest_framework.viewsets import GenericViewSet
 
-from products.models import Product
+from products.models import Product, Category
 from products.serializers import ProductSerializer
+
+
+def list_all_products(category):
+    categories = [category.id]
+    if category.level == 3:
+        return categories
+    elif category.level == 2:
+        cats3 = Category.objects.filter(parent_category=category)
+        for c3 in cats3:
+            categories.append(c3.id)
+    elif category.level == 1:
+        cats2 = Category.objects.filter(parent_category=category)
+        for c2 in cats2:
+            cats3 = Category.objects.filter(parent_category=c2)
+            for c3 in cats3:
+                categories.append(c3.id)
+    return categories
 
 
 class ListProductViewSet(GenericViewSet, ListModelMixin, RetrieveModelMixin):
     permission_classes = (AllowAny,)
     queryset = Product.objects.all()
     serializer_class = ProductSerializer
-    filter_backends = [filters.SearchFilter, DjangoFilterBackend]
+    filter_backends = [filters.SearchFilter]
     search_fields = ['title']
-    filterset_fields = ['category']
+
+    def get_queryset(self):
+        category_id = self.request.query_params['category']
+        category = Category.objects.get(id=category_id)
+        category_ids = list_all_products(category)
+        queryset = Product.objects.filter(category_id__in=category_ids)
+        return queryset
