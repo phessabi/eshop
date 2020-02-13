@@ -32,8 +32,10 @@ class ListProductViewSet(GenericViewSet, ListModelMixin, RetrieveModelMixin):
     search_fields = ['title']
 
     def get_queryset(self):
-        category_id = self.request.query_params['category']
-        category = Category.objects.get(id=category_id)
-        category_ids = list_all_products(category)
-        queryset = Product.objects.filter(category_id__in=category_ids)
+        category_id = self.request.query_params.get('category')
+        queryset = Product.objects.all()
+        if category_id is not None:
+            category = Category.objects.get(id=category_id)
+            category_ids = list_all_products(category)
+            queryset = Product.objects.filter(category_id__in=category_ids)
         return queryset

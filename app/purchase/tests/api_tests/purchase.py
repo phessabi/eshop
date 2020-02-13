@@ -99,7 +99,7 @@ class PurchaseAPITestCase(TestCase):
                 }
             ],
             'address': 'a chert address',
-            'phone_number': '09308005234',
+            'phone_number': '+989308005234',
             'delivery_date': '2020-02-11'
         }
         response = client.post('/purchase/order/',
@@ -126,7 +126,7 @@ class PurchaseAPITestCase(TestCase):
                 }
             ],
             'address': 'a chert address',
-            'phone_number': '09308005234',
+            'phone_number': '+989308005234',
             'delivery_date': '2020-02-11'
         }
         response = client.post('/purchase/order/',
