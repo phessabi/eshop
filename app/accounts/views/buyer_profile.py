@@ -1,5 +1,5 @@
 from rest_framework import status
-from rest_framework.generics import RetrieveAPIView, CreateAPIView, UpdateAPIView
+from rest_framework.generics import RetrieveAPIView, CreateAPIView, UpdateAPIView, ListAPIView
 from rest_framework.permissions import AllowAny, IsAuthenticated
 from rest_framework.response import Response
 from rest_framework.viewsets import GenericViewSet
@@ -25,7 +25,7 @@ class CreateBuyerViewSet(GenericViewSet, CreateAPIView):
         return Response(serializer.data, status=status.HTTP_201_CREATED, headers=headers)
 
 
-class UpdateRetrieveBuyerViewSet(GenericViewSet, UpdateAPIView, RetrieveAPIView):
+class UpdateRetrieveBuyerViewSet(GenericViewSet, UpdateAPIView, RetrieveAPIView, ListAPIView):
     permission_classes = (IsAuthenticated,)
     serializer_class = BuyerProfileSerializer
     queryset = Buyer.objects.all()

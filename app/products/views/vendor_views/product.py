@@ -23,6 +23,7 @@ class VendorProductViewSet(ModelViewSet):
         vendor = self.request.user.vendor
         return Product.objects.filter(
             vendor=vendor,
+            archived=False
         )
 
     def perform_destroy(self, instance: Product):

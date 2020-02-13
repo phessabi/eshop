@@ -33,9 +33,9 @@ class ListProductViewSet(GenericViewSet, ListModelMixin, RetrieveModelMixin):
 
     def get_queryset(self):
         category_id = self.request.query_params.get('category')
-        queryset = Product.objects.all()
+        queryset = Product.objects.filter(archived=False)
         if category_id is not None:
             category = Category.objects.get(id=category_id)
             category_ids = list_all_products(category)
-            queryset = Product.objects.filter(category_id__in=category_ids)
+            queryset = Product.objects.filter(archived=False, category_id__in=category_ids)
         return queryset

@@ -21,6 +21,7 @@ class ChargeView(ListCreateAPIView, GenericViewSet):
     def create(self, request, *args, **kwargs):
         user = request.user
         data = request.data
+        data['user'] = user.id
         serializer = self.get_serializer(data=data)
         serializer.is_valid(raise_exception=True)
         charge = serializer.save()

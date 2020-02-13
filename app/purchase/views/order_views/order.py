@@ -21,6 +21,7 @@ class OrderViewSet(ModelViewSet):
     def create(self, request, *args, **kwargs):
         data = request.data
         products = data.get('products')
+        data['buyer'] = request.user.buyer.id
         serializer = self.get_serializer(data=data)
         serializer.is_valid(raise_exception=True)
         order = serializer.save()
