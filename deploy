@@ -1,5 +1,10 @@
 #!/bin/bash
 
+set -e
+set -o pipefail
+
+
 docker-compose -f $1/docker-compose.yml down
 git -C $1 pull
-docker-compose -f $1/docker-compose.yml up -d migrate app
+docker-compose -f $1/docker-compose.yml run migrate
+docker-compose -f $1/docker-compose.yml up -d app
