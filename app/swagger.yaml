@@ -1,0 +1,1081 @@
+swagger: '2.0'
+info:
+  title: Snippets API
+  description: Test description
+  termsOfService: https://www.google.com/policies/terms/
+  contact:
+    email: contact@snippets.local
+  license:
+    name: BSD License
+  version: v1
+host: 127.0.0.1:8000
+schemes:
+  - http
+basePath: /
+consumes:
+  - application/json
+produces:
+  - application/json
+securityDefinitions:
+  Basic:
+    type: basic
+security:
+  - Basic: []
+paths:
+  /accounts/buyer-profile/:
+    get:
+      operationId: accounts_buyer-profile_list
+      description: ''
+      parameters: []
+      responses:
+        '200':
+          description: ''
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/BuyerProfile'
+      tags:
+        - accounts
+    parameters: []
+  /accounts/buyer-profile/{id}/:
+    get:
+      operationId: accounts_buyer-profile_read
+      description: ''
+      parameters: []
+      responses:
+        '200':
+          description: ''
+          schema:
+            $ref: '#/definitions/BuyerProfile'
+      tags:
+        - accounts
+    put:
+      operationId: accounts_buyer-profile_update
+      description: ''
+      parameters:
+        - name: data
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/BuyerProfile'
+      responses:
+        '200':
+          description: ''
+          schema:
+            $ref: '#/definitions/BuyerProfile'
+      tags:
+        - accounts
+    patch:
+      operationId: accounts_buyer-profile_partial_update
+      description: ''
+      parameters:
+        - name: data
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/BuyerProfile'
+      responses:
+        '200':
+          description: ''
+          schema:
+            $ref: '#/definitions/BuyerProfile'
+      tags:
+        - accounts
+    parameters:
+      - name: id
+        in: path
+        description: "A unique integer value identifying this \u062E\u0631\u06CC\u062F\
+          \u0627\u0631."
+        required: true
+        type: integer
+  /accounts/buyer-registration/:
+    post:
+      operationId: accounts_buyer-registration_create
+      description: ''
+      parameters:
+        - name: data
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/User'
+      responses:
+        '201':
+          description: ''
+          schema:
+            $ref: '#/definitions/User'
+      tags:
+        - accounts
+    parameters: []
+  /accounts/charge/:
+    get:
+      operationId: accounts_charge_list
+      description: ''
+      parameters: []
+      responses:
+        '200':
+          description: ''
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Charge'
+      tags:
+        - accounts
+    post:
+      operationId: accounts_charge_create
+      description: ''
+      parameters:
+        - name: data
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/Charge'
+      responses:
+        '201':
+          description: ''
+          schema:
+            $ref: '#/definitions/Charge'
+      tags:
+        - accounts
+    parameters: []
+  /accounts/get-type/:
+    get:
+      operationId: accounts_get-type_list
+      description: ''
+      parameters: []
+      responses:
+        '200':
+          description: ''
+      tags:
+        - accounts
+    parameters: []
+  /accounts/list-vendors/:
+    get:
+      operationId: accounts_list-vendors_list
+      description: ''
+      parameters: []
+      responses:
+        '200':
+          description: ''
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Vendor'
+      tags:
+        - accounts
+    parameters: []
+  /accounts/list-vendors/{id}/:
+    get:
+      operationId: accounts_list-vendors_read
+      description: ''
+      parameters: []
+      responses:
+        '200':
+          description: ''
+          schema:
+            $ref: '#/definitions/Vendor'
+      tags:
+        - accounts
+    parameters:
+      - name: id
+        in: path
+        description: "A unique integer value identifying this \u0641\u0631\u0648\u0634\
+          \u0646\u062F\u0647."
+        required: true
+        type: integer
+  /accounts/token/:
+    post:
+      operationId: accounts_token_create
+      description: "Takes a set of user credentials and returns an access and refresh\
+        \ JSON web\ntoken pair to prove the authentication of those credentials."
+      parameters:
+        - name: data
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/TokenObtainPair'
+      responses:
+        '201':
+          description: ''
+          schema:
+            $ref: '#/definitions/TokenObtainPair'
+      tags:
+        - accounts
+    parameters: []
+  /accounts/token/refresh/:
+    post:
+      operationId: accounts_token_refresh_create
+      description: "Takes a refresh type JSON web token and returns an access type\
+        \ JSON web\ntoken if the refresh token is valid."
+      parameters:
+        - name: data
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/TokenRefresh'
+      responses:
+        '201':
+          description: ''
+          schema:
+            $ref: '#/definitions/TokenRefresh'
+      tags:
+        - accounts
+    parameters: []
+  /accounts/vendor-profile/{id}/:
+    get:
+      operationId: accounts_vendor-profile_read
+      description: ''
+      parameters: []
+      responses:
+        '200':
+          description: ''
+          schema:
+            $ref: '#/definitions/VendorProfile'
+      tags:
+        - accounts
+    put:
+      operationId: accounts_vendor-profile_update
+      description: ''
+      parameters:
+        - name: data
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/VendorProfile'
+      responses:
+        '200':
+          description: ''
+          schema:
+            $ref: '#/definitions/VendorProfile'
+      tags:
+        - accounts
+    patch:
+      operationId: accounts_vendor-profile_partial_update
+      description: ''
+      parameters:
+        - name: data
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/VendorProfile'
+      responses:
+        '200':
+          description: ''
+          schema:
+            $ref: '#/definitions/VendorProfile'
+      tags:
+        - accounts
+    parameters:
+      - name: id
+        in: path
+        description: "A unique integer value identifying this \u0641\u0631\u0648\u0634\
+          \u0646\u062F\u0647."
+        required: true
+        type: integer
+  /accounts/vendor-registration/:
+    post:
+      operationId: accounts_vendor-registration_create
+      description: ''
+      parameters:
+        - name: data
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/User'
+      responses:
+        '201':
+          description: ''
+          schema:
+            $ref: '#/definitions/User'
+      tags:
+        - accounts
+    parameters: []
+  /products/admin-category/:
+    get:
+      operationId: products_admin-category_list
+      description: ''
+      parameters: []
+      responses:
+        '200':
+          description: ''
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Category'
+      tags:
+        - products
+    post:
+      operationId: products_admin-category_create
+      description: ''
+      parameters:
+        - name: data
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/Category'
+      responses:
+        '201':
+          description: ''
+          schema:
+            $ref: '#/definitions/Category'
+      tags:
+        - products
+    parameters: []
+  /products/admin-category/{id}/:
+    get:
+      operationId: products_admin-category_read
+      description: ''
+      parameters: []
+      responses:
+        '200':
+          description: ''
+          schema:
+            $ref: '#/definitions/Category'
+      tags:
+        - products
+    put:
+      operationId: products_admin-category_update
+      description: ''
+      parameters:
+        - name: data
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/Category'
+      responses:
+        '200':
+          description: ''
+          schema:
+            $ref: '#/definitions/Category'
+      tags:
+        - products
+    patch:
+      operationId: products_admin-category_partial_update
+      description: ''
+      parameters:
+        - name: data
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/Category'
+      responses:
+        '200':
+          description: ''
+          schema:
+            $ref: '#/definitions/Category'
+      tags:
+        - products
+    delete:
+      operationId: products_admin-category_delete
+      description: ''
+      parameters: []
+      responses:
+        '204':
+          description: ''
+      tags:
+        - products
+    parameters:
+      - name: id
+        in: path
+        description: "A unique integer value identifying this \u062F\u0633\u062A\u0647\
+          ."
+        required: true
+        type: integer
+  /products/list-categories/:
+    get:
+      operationId: products_list-categories_list
+      description: ''
+      parameters: []
+      responses:
+        '200':
+          description: ''
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Category'
+      tags:
+        - products
+    parameters: []
+  /products/list-products/:
+    get:
+      operationId: products_list-products_list
+      description: ''
+      parameters:
+        - name: search
+          in: query
+          description: A search term.
+          required: false
+          type: string
+      responses:
+        '200':
+          description: ''
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Product'
+      tags:
+        - products
+    parameters: []
+  /products/list-products/{id}/:
+    get:
+      operationId: products_list-products_read
+      description: ''
+      parameters: []
+      responses:
+        '200':
+          description: ''
+          schema:
+            $ref: '#/definitions/Product'
+      tags:
+        - products
+    parameters:
+      - name: id
+        in: path
+        description: "A unique integer value identifying this \u0645\u062D\u0635\u0648\
+          \u0644."
+        required: true
+        type: integer
+  /products/vendor-product/:
+    get:
+      operationId: products_vendor-product_list
+      description: ''
+      parameters: []
+      responses:
+        '200':
+          description: ''
+      tags:
+        - products
+    post:
+      operationId: products_vendor-product_create
+      description: ''
+      parameters: []
+      responses:
+        '201':
+          description: ''
+      tags:
+        - products
+    parameters: []
+  /products/vendor-product/{id}/:
+    get:
+      operationId: products_vendor-product_read
+      description: ''
+      parameters: []
+      responses:
+        '200':
+          description: ''
+      tags:
+        - products
+    put:
+      operationId: products_vendor-product_update
+      description: ''
+      parameters: []
+      responses:
+        '200':
+          description: ''
+      tags:
+        - products
+    patch:
+      operationId: products_vendor-product_partial_update
+      description: ''
+      parameters: []
+      responses:
+        '200':
+          description: ''
+      tags:
+        - products
+    delete:
+      operationId: products_vendor-product_delete
+      description: ''
+      parameters: []
+      responses:
+        '204':
+          description: ''
+      tags:
+        - products
+    parameters:
+      - name: id
+        in: path
+        description: "A unique integer value identifying this \u0645\u062D\u0635\u0648\
+          \u0644."
+        required: true
+        type: integer
+  /purchase/add-cart/:
+    post:
+      operationId: purchase_add-cart_create
+      description: ''
+      parameters:
+        - name: data
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/Cart'
+      responses:
+        '201':
+          description: ''
+          schema:
+            $ref: '#/definitions/Cart'
+      tags:
+        - purchase
+    parameters: []
+  /purchase/cart/:
+    get:
+      operationId: purchase_cart_list
+      description: ''
+      parameters: []
+      responses:
+        '200':
+          description: ''
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Cart'
+      tags:
+        - purchase
+    post:
+      operationId: purchase_cart_create
+      description: ''
+      parameters:
+        - name: data
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/Cart'
+      responses:
+        '201':
+          description: ''
+          schema:
+            $ref: '#/definitions/Cart'
+      tags:
+        - purchase
+    parameters: []
+  /purchase/cart/{id}/:
+    get:
+      operationId: purchase_cart_read
+      description: ''
+      parameters: []
+      responses:
+        '200':
+          description: ''
+          schema:
+            $ref: '#/definitions/Cart'
+      tags:
+        - purchase
+    put:
+      operationId: purchase_cart_update
+      description: ''
+      parameters:
+        - name: data
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/Cart'
+      responses:
+        '200':
+          description: ''
+          schema:
+            $ref: '#/definitions/Cart'
+      tags:
+        - purchase
+    patch:
+      operationId: purchase_cart_partial_update
+      description: ''
+      parameters:
+        - name: data
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/Cart'
+      responses:
+        '200':
+          description: ''
+          schema:
+            $ref: '#/definitions/Cart'
+      tags:
+        - purchase
+    delete:
+      operationId: purchase_cart_delete
+      description: ''
+      parameters: []
+      responses:
+        '204':
+          description: ''
+      tags:
+        - purchase
+    parameters:
+      - name: id
+        in: path
+        description: "A unique integer value identifying this \u0633\u0628\u062F \u062E\
+          \u0631\u06CC\u062F."
+        required: true
+        type: integer
+  /purchase/date/:
+    get:
+      operationId: purchase_date_list
+      description: ''
+      parameters: []
+      responses:
+        '200':
+          description: ''
+      tags:
+        - purchase
+    parameters: []
+  /purchase/order/:
+    get:
+      operationId: purchase_order_list
+      description: ''
+      parameters: []
+      responses:
+        '200':
+          description: ''
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Order'
+      tags:
+        - purchase
+    post:
+      operationId: purchase_order_create
+      description: ''
+      parameters:
+        - name: data
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/Order'
+      responses:
+        '201':
+          description: ''
+          schema:
+            $ref: '#/definitions/Order'
+      tags:
+        - purchase
+    parameters: []
+  /purchase/order/{id}/:
+    get:
+      operationId: purchase_order_read
+      description: ''
+      parameters: []
+      responses:
+        '200':
+          description: ''
+          schema:
+            $ref: '#/definitions/Order'
+      tags:
+        - purchase
+    put:
+      operationId: purchase_order_update
+      description: ''
+      parameters:
+        - name: data
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/Order'
+      responses:
+        '200':
+          description: ''
+          schema:
+            $ref: '#/definitions/Order'
+      tags:
+        - purchase
+    patch:
+      operationId: purchase_order_partial_update
+      description: ''
+      parameters:
+        - name: data
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/Order'
+      responses:
+        '200':
+          description: ''
+          schema:
+            $ref: '#/definitions/Order'
+      tags:
+        - purchase
+    delete:
+      operationId: purchase_order_delete
+      description: ''
+      parameters: []
+      responses:
+        '204':
+          description: ''
+      tags:
+        - purchase
+    parameters:
+      - name: id
+        in: path
+        description: "A unique integer value identifying this \u0633\u0641\u0627\u0631\
+          \u0634."
+        required: true
+        type: integer
+  /purchase/payment/:
+    get:
+      operationId: purchase_payment_list
+      description: ''
+      parameters: []
+      responses:
+        '200':
+          description: ''
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Payment'
+      tags:
+        - purchase
+    post:
+      operationId: purchase_payment_create
+      description: ''
+      parameters:
+        - name: data
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/Payment'
+      responses:
+        '201':
+          description: ''
+          schema:
+            $ref: '#/definitions/Payment'
+      tags:
+        - purchase
+    parameters: []
+  /purchase/phone-address/:
+    get:
+      operationId: purchase_phone-address_list
+      description: ''
+      parameters: []
+      responses:
+        '200':
+          description: ''
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/PhoneAddress'
+      tags:
+        - purchase
+    parameters: []
+definitions:
+  BuyerProfile:
+    required:
+      - name
+    type: object
+    properties:
+      id:
+        title: ID
+        type: integer
+        readOnly: true
+      name:
+        title: "\u0646\u0627\u0645"
+        type: string
+        maxLength: 100
+        minLength: 1
+      address:
+        title: "\u0622\u062F\u0631\u0633"
+        type: string
+        maxLength: 500
+        x-nullable: true
+      phone_number:
+        title: "\u0634\u0645\u0627\u0631\u0647 \u062A\u0644\u0641\u0646"
+        type: string
+        maxLength: 128
+        x-nullable: true
+      credit:
+        title: "\u0627\u0639\u062A\u0628\u0627\u0631"
+        type: integer
+  User:
+    required:
+      - password
+    type: object
+    properties:
+      id:
+        title: ID
+        type: integer
+        readOnly: true
+      password:
+        title: Password
+        type: string
+        maxLength: 128
+        minLength: 1
+      email:
+        title: Email address
+        type: string
+        format: email
+        maxLength: 254
+  Charge:
+    required:
+      - user
+      - amount
+    type: object
+    properties:
+      id:
+        title: ID
+        type: integer
+        readOnly: true
+      user:
+        title: "\u06A9\u0627\u0631\u0628\u0631"
+        type: integer
+      amount:
+        title: "\u0647\u0632\u06CC\u0646\u0647"
+        type: integer
+      payment_time:
+        title: "\u0632\u0645\u0627\u0646 \u067E\u0631\u062F\u0627\u062E\u062A"
+        type: string
+        format: date-time
+  Vendor:
+    required:
+      - name
+    type: object
+    properties:
+      id:
+        title: ID
+        type: integer
+        readOnly: true
+      name:
+        title: "\u0646\u0627\u0645"
+        type: string
+        maxLength: 100
+        minLength: 1
+  TokenObtainPair:
+    required:
+      - username
+      - password
+    type: object
+    properties:
+      username:
+        title: Username
+        type: string
+        minLength: 1
+      password:
+        title: Password
+        type: string
+        minLength: 1
+  TokenRefresh:
+    required:
+      - refresh
+    type: object
+    properties:
+      refresh:
+        title: Refresh
+        type: string
+        minLength: 1
+  VendorProfile:
+    required:
+      - name
+      - user
+    type: object
+    properties:
+      id:
+        title: ID
+        type: integer
+        readOnly: true
+      name:
+        title: "\u0646\u0627\u0645"
+        type: string
+        maxLength: 100
+        minLength: 1
+      user:
+        $ref: '#/definitions/User'
+  Field:
+    required:
+      - name
+      - category
+    type: object
+    properties:
+      id:
+        title: ID
+        type: integer
+        readOnly: true
+      name:
+        title: "\u0646\u0627\u0645"
+        type: string
+        maxLength: 64
+        minLength: 1
+      category:
+        title: "\u062F\u0633\u062A\u0647"
+        type: integer
+  Category:
+    required:
+      - name
+      - level
+    type: object
+    properties:
+      id:
+        title: ID
+        type: integer
+        readOnly: true
+      name:
+        title: "\u0646\u0627\u0645"
+        type: string
+        maxLength: 50
+        minLength: 1
+      level:
+        title: "\u0633\u0637\u062D"
+        type: integer
+        enum:
+          - 1
+          - 2
+          - 3
+      parent_category:
+        title: "\u062F\u0633\u062A\u0647 \u067E\u062F\u0631"
+        type: integer
+        x-nullable: true
+      fields:
+        type: array
+        items:
+          $ref: '#/definitions/Field'
+        readOnly: true
+  Specification:
+    required:
+      - product
+      - field
+      - value
+    type: object
+    properties:
+      id:
+        title: ID
+        type: integer
+        readOnly: true
+      product:
+        title: "\u0645\u062D\u0635\u0648\u0644"
+        type: integer
+      field:
+        title: "\u0641\u06CC\u0644\u062F"
+        type: integer
+      field_name:
+        title: Field name
+        type: string
+        readOnly: true
+      value:
+        title: "\u0645\u0642\u062F\u0627\u0631"
+        type: string
+        maxLength: 1024
+        minLength: 1
+  Product:
+    required:
+      - title
+      - category
+      - price
+    type: object
+    properties:
+      id:
+        title: ID
+        type: integer
+        readOnly: true
+      title:
+        title: "\u0639\u0646\u0648\u0627\u0646"
+        type: string
+        maxLength: 64
+        minLength: 1
+      category:
+        title: "\u062F\u0633\u062A\u0647"
+        type: integer
+      price:
+        title: "\u0642\u06CC\u0645\u062A"
+        type: integer
+      express:
+        title: "\u0641\u0648\u0631\u06CC"
+        type: boolean
+      archived:
+        title: "\u062D\u0630\u0641 \u0634\u062F\u0647"
+        type: boolean
+      specifications:
+        type: array
+        items:
+          $ref: '#/definitions/Specification'
+        readOnly: true
+      vendor:
+        title: "\u0641\u0631\u0648\u0634\u0646\u062F\u0647"
+        type: integer
+        x-nullable: true
+  Cart:
+    type: object
+    properties:
+      id:
+        title: ID
+        type: integer
+        readOnly: true
+      products:
+        type: array
+        items:
+          $ref: '#/definitions/Product'
+        readOnly: true
+      total_price:
+        title: Total price
+        type: string
+        readOnly: true
+  Order:
+    required:
+      - buyer
+      - address
+      - phone_number
+      - delivery_date
+    type: object
+    properties:
+      id:
+        title: ID
+        type: integer
+        readOnly: true
+      buyer:
+        title: "\u062E\u0631\u06CC\u062F\u0627\u0631"
+        type: integer
+      products:
+        type: array
+        items:
+          $ref: '#/definitions/Product'
+        readOnly: true
+      address:
+        title: "\u0622\u062F\u0631\u0633"
+        type: string
+        maxLength: 2000
+        minLength: 1
+      phone_number:
+        title: "\u0634\u0645\u0627\u0631\u0647 \u062A\u0644\u0641\u0646"
+        type: string
+        maxLength: 128
+        minLength: 1
+      delivery_date:
+        title: "\u0632\u0645\u0627\u0646 \u062A\u062D\u0648\u06CC\u0644"
+        type: string
+        format: date
+      total_price:
+        title: Total price
+        type: string
+        readOnly: true
+  Payment:
+    required:
+      - buyer
+      - order
+      - total_price
+    type: object
+    properties:
+      id:
+        title: ID
+        type: integer
+        readOnly: true
+      buyer:
+        title: "\u062E\u0631\u06CC\u062F\u0627\u0631"
+        type: integer
+      order:
+        title: "\u0633\u0641\u0627\u0631\u0634"
+        type: integer
+      total_price:
+        title: "\u0645\u0628\u0644\u063A"
+        type: integer
+      payment_time:
+        title: "\u0632\u0645\u0627\u0646 \u067E\u0631\u062F\u0627\u062E\u062A"
+        type: string
+        format: date-time
+  PhoneAddress:
+    type: object
+    properties:
+      address:
+        title: "\u0622\u062F\u0631\u0633"
+        type: string
+        maxLength: 500
+        x-nullable: true
+      phone_number:
+        title: "\u0634\u0645\u0627\u0631\u0647 \u062A\u0644\u0641\u0646"
+        type: string
+        maxLength: 128
+        x-nullable: true

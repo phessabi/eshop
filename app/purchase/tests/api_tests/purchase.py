@@ -94,9 +94,10 @@ class PurchaseAPITestCase(TestCase):
         products = content['products']
         self.assertEqual(len(products), 1)
 
-        response = client.delete('/purchase/cart/' + str(cart_id) + '/',
-                                 json.dumps(data),
-                                 content_type='application/json')
+        response = client.delete('/purchase/cart/' + str(cart_id) + '/?id=' + str(self.product1.id))\
+            # ,
+            #                      json.dumps(data),
+            #                      content_type='application/json')
 
         self.assertEqual(response.status_code, 204)
 

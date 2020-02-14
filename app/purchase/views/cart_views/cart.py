@@ -22,6 +22,8 @@ class CartViewSet(ModelViewSet):
     def destroy(self, request, *args, **kwargs):
         data = request.data
         product_id = data.get('id')
+        if product_id is None:
+            product_id = int(request.query_params['id'])
         product = Product.objects.get(id=product_id)
         instance = self.get_object()
         instance.products.remove(product)
