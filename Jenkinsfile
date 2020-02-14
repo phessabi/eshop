@@ -29,6 +29,8 @@ pipeline
             {
                 sh 'python app/manage.py migrate'
                 sh 'python app/manage.py test app'
+				sh 'python app/manage.py check --deploy'
+				
             }
         }
         stage('deploy')
