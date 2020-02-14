@@ -26,6 +26,6 @@ class VendorProductViewSet(ModelViewSet):
             archived=False
         )
 
-    def perform_destroy(self, instance: Product):
-        instance.archived = True
-        instance.save()
+    # def perform_destroy(self, instance: Product):
+    #     instance.archived = True
+    #     instance.save()
