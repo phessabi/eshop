@@ -33,9 +33,15 @@ class ListProductViewSet(GenericViewSet, ListModelMixin, RetrieveModelMixin):
 
     def get_queryset(self):
         category_id = self.request.query_params.get('category')
+        sort_price = self.request.query_params.get('sort_price')
         queryset = Product.objects.filter(archived=False)
         if category_id is not None:
             category = Category.objects.get(id=category_id)
             category_ids = list_all_products(category)
             queryset = Product.objects.filter(archived=False, category_id__in=category_ids)
+        if sort_price is not None:
+            if sort_price == 'ascending':
+                queryset = queryset.order_by('price')
+            else:
+                queryset = queryset.order_by('-price')
         return queryset
