@@ -6,6 +6,6 @@ set -o pipefail
 
 docker-compose -f $1/docker-compose.yml down
 git -C $1 pull
-docker-compose -f $1/docker-compose.yml up builder --build
-docker-compose -f $1/docker-compose.yml run migrate
-docker-compose -f $1/docker-compose.yml up -d app
+docker-compose -f $1/docker-compose.yml up -d --build
+#docker-compose -f $1/docker-compose.yml run migrate
+#docker-compose -f $1/docker-compose.yml up -d app
