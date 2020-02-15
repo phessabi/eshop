@@ -3,7 +3,6 @@ version: '3'
 services:
   builder:
     build: .
-
   migrate:
     build: .
     command: python app/manage.py migrate
