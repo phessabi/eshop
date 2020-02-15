@@ -5,6 +5,7 @@ set -o pipefail
 
 
 docker-compose -f $1/docker-compose.yml down
+git -C $1 reset HEAD --hard
 git -C $1 pull
 docker-compose -f $1/docker-compose.yml up --exit-code-from migrate --build
 #docker-compose -f $1/docker-compose.yml run migrate
