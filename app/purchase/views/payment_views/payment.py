@@ -20,7 +20,7 @@ class PaymentView(ListCreateAPIView, GenericViewSet):
 
     def create(self, request, *args, **kwargs):
         data = request.data
-        data['buyer'] = request.user.buyer.id
+        data['buyer'] = request.user.buyer
         order = Order.objects.get(id=data['order'])
         data['total_price'] = order.total_price
         serializer = self.get_serializer(data=data)
