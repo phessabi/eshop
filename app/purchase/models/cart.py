@@ -6,7 +6,6 @@ class Cart(models.Model):
     products = models.ManyToManyField(
         'products.Product',
         verbose_name='محصول',
-        null=True,
         blank=True
     )
 
