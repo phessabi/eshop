@@ -4,13 +4,14 @@ from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from rest_framework.viewsets import ModelViewSet, GenericViewSet
 
+from _helpers.permissions import IsBuyer
 from products.models import Product
 from purchase.models import Cart
 from purchase.serializers import CartSerializer
 
 
 class CartViewSet(ModelViewSet):
-    permission_classes = (IsAuthenticated,)
+    permission_classes = (IsAuthenticated, IsBuyer)
     serializer_class = CartSerializer
     queryset = Cart.objects.all()
 
@@ -40,7 +41,7 @@ class CartViewSet(ModelViewSet):
 
 
 class AddToCartView(GenericViewSet, CreateAPIView):
-    permission_classes = (IsAuthenticated,)
+    permission_classes = (IsAuthenticated, IsBuyer)
     serializer_class = CartSerializer
     queryset = Cart.objects.all()
 

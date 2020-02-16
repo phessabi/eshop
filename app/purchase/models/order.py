@@ -3,9 +3,12 @@ from phonenumber_field.modelfields import PhoneNumberField
 
 
 class Order(models.Model):
+    PENDING = 1
+    PAID = 2
+
     STATUS_CHOICES = [
-        (1, 'در انتظار'),
-        (2, 'پرداخت شده')
+        (PENDING, 'در انتظار'),
+        (PAID, 'پرداخت شده')
     ]
 
     buyer = models.ForeignKey(
@@ -38,16 +41,23 @@ class Order(models.Model):
         verbose_name='وضعیت'
     )
 
-    class Meta:
-        verbose_name = 'سفارش'
-        verbose_name_plural = 'سفارش‌ها'
-
-    def __str__(self):
-        return str(self.id)
-
     @property
     def total_price(self):
         total_price = 0
         for product in self.products.all():
             total_price += product.price
         return total_price
+
+    @property
+    def total_price_after_sale(self):
+        total_price = 0
+        for product in self.products.all():
+            total_price += product.price_after_sale
+        return total_price
+
+    def __str__(self):
+        return str(self.id)
+
+    class Meta:
+        verbose_name = 'سفارش'
+        verbose_name_plural = 'سفارش‌ها'
