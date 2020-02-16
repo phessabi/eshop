@@ -4,6 +4,7 @@ from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from rest_framework.viewsets import GenericViewSet
 
+from accounts.models import Buyer
 from purchase.models import Payment, Order
 from purchase.serializers import PaymentSerializer
 
@@ -20,6 +21,11 @@ class PaymentView(ListCreateAPIView, GenericViewSet):
 
     def create(self, request, *args, **kwargs):
         data = request.data
+        print(data)
+        print(request.user)
+        print(request.user.buyer.id)
+        print(Buyer.objects.get(id=request.user.buyer.id))
+        print(Order.objects.get(id=data['order']))
         data['buyer'] = request.user.buyer.id
         order = Order.objects.get(id=data['order'])
         data['total_price'] = order.total_price
