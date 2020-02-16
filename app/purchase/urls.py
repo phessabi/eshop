@@ -9,7 +9,7 @@ router.register('cart', CartViewSet)
 router.register('add-cart', AddToCartView)
 router.register('order', OrderViewSet)
 router.register('phone-address', PhoneAddressView)
-router.register('payment', PaymentView)
+router.register('payment', PaymentView, basename='payment')
 router.register('campaigns', CampaignViewSet, basename='campaigns')
 
 urlpatterns = [
