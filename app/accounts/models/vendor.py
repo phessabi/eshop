@@ -25,11 +25,6 @@ class Vendor(models.Model):
         verbose_name='اعتبار'
     )
 
-    def clear_campaign(self):
-        campaign = self.campaign
-        if campaign:
-            campaign.delete()
-
     class Meta:
         verbose_name = 'فروشنده'
         verbose_name_plural = 'فروشندگان'
