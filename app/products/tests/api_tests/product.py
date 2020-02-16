@@ -114,3 +114,52 @@ class ProductAPITestCase(TestCase):
         response = client.delete('/products/vendor-product/' + str(self.product1.id) + '/')
         self.assertEqual(response.status_code, 204)
         self.assertEqual(Product.objects.filter(archived=False).count(), 2)
+
+    def test_making_product_express(self):
+        response = self.client.post('/accounts/token/',
+                                    {'username': 'user_1', 'password': '1234'},
+                                    content_type='application/json')
+        token = response.data['access']
+        client = APIClient()
+        client.credentials(HTTP_AUTHORIZATION='Bearer ' + token)
+
+        data = {
+            'amount': 9
+        }
+        response = client.post('/accounts/charge/',
+                               json.dumps(data),
+                               content_type='application/json')
+        self.assertEqual(response.status_code, 201)
+
+        data = {
+            'title': 'new_prod',
+            'category': self.category_id,
+            'price': 100,
+            'vendor': self.vendor_id,
+            'specifications': []
+        }
+        response = client.post('/products/vendor-product/',
+                               json.dumps(data),
+                               content_type='application/json')
+
+        self.assertEqual(response.status_code, 201)
+
+        product_id = response.data.get('id')
+        response = client.put('/products/express/' + str(product_id) + '/')
+
+        self.assertEqual(response.status_code, 402)
+
+        data = {
+            'amount': 9
+        }
+        response = client.post('/accounts/charge/',
+                               json.dumps(data),
+                               content_type='application/json')
+
+        self.assertEqual(response.status_code, 201)
+
+        response = client.put('/products/express/' + str(product_id) + '/')
+
+        self.assertEqual(response.status_code, 200)
+
+

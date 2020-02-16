@@ -33,6 +33,8 @@ ALLOWED_HOSTS = ['194.5.192.129', '127.0.0.1', 'localhost']
 # Application definition
 
 INSTALLED_APPS = [
+    'jet.dashboard',
+    'jet',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -156,3 +158,6 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
 
 STATIC_URL = '/static/'
+
+JET_SIDE_MENU_COMPACT = True
+

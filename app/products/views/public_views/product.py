@@ -5,7 +5,6 @@ from rest_framework.viewsets import GenericViewSet
 
 from products.models import Product, Category
 from products.serializers import ProductSerializer
-import numpy
 
 
 def list_all_products(category):
@@ -35,14 +34,14 @@ class ListProductViewSet(GenericViewSet, ListModelMixin, RetrieveModelMixin):
     def get_queryset(self):
         category_id = self.request.query_params.get('category')
         sort_price = self.request.query_params.get('sort_price')
-        queryset = Product.objects.filter(archived=False)
+        queryset = Product.objects.all().order_by('-express')
         if category_id is not None:
             category = Category.objects.get(id=category_id)
             category_ids = list_all_products(category)
-            queryset = Product.objects.filter(archived=False, category_id__in=category_ids)
+            queryset = Product.objects.filter(category_id__in=category_ids).order_by('-express')
         if sort_price is not None:
             if sort_price == 'ascending':
-                queryset = queryset.order_by('price')
+                queryset = queryset.order_by('-express', 'price')
             else:
-                queryset = queryset.order_by('-price')
+                queryset = queryset.order_by('-express', '-price')
         return queryset
