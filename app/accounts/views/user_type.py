@@ -13,9 +13,12 @@ class GetTypeView(APIView):
         if hasattr(user, 'vendor'):
             type = 'vendor'
             name = user.vendor.name
-        else:
+        elif hasattr(user, 'buyer'):
             type = 'buyer'
             name = user.buyer.name
+        else:
+            type = 'admin'
+            name = user.username
         data = {
             'name': name,
             'type': type,
