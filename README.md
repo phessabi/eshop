@@ -1,4 +1,4 @@
-# [Eshop](http://194.5.192.129:4200/home) [![Build Status](https://travis-ci.com/phessabi/eshop.svg?branch=master)](https://travis-ci.com/phessabi/eshop) ![Alt text](./cover.svg) <img src="./cover.svg">
+# [Eshop](http://194.5.192.129:4200/home) [![Build Status](https://travis-ci.com/phessabi/eshop.svg?branch=master)](https://travis-ci.com/phessabi/eshop) ![Alt text](./cover.svg)
 
 
 Online shopping [website](http://194.5.192.129:4200/home).
