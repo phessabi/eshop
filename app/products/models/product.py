@@ -43,6 +43,13 @@ class Product(models.Model):
         verbose_name='حذف شده'
     )
 
+    @property
+    def price_after_sale(self):
+        campaign = getattr(self.vendor, 'campaign', None)
+        if campaign is None:
+            return self.price
+        return self.price * (1 - campaign.sale_amount)
+
     class Meta:
         verbose_name = 'محصول'
         verbose_name_plural = 'محصولات'
