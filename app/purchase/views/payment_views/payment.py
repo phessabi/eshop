@@ -22,7 +22,7 @@ class PaymentView(ListCreateAPIView, GenericViewSet):
         data = request.data
         data['buyer'] = request.user.buyer.id
         order = Order.objects.get(id=data['order'])
-        data['total_price'] = order.total_price
+        data['total_price'] = order.total_price_after_sale
         serializer = self.get_serializer(data=data)
         serializer.is_valid(raise_exception=True)
         payment = serializer.save()

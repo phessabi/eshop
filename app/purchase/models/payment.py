@@ -1,6 +1,6 @@
 from datetime import datetime
 
-from django.db import models
+from django.db import models, transaction
 
 
 class Payment(models.Model):
@@ -26,10 +26,16 @@ class Payment(models.Model):
         verbose_name='زمان پرداخت'
     )
 
-    class Meta:
-        verbose_name = 'پرداخت'
-        verbose_name_plural = 'پرداخت‌ها'
-
     def __str__(self):
         return str(self.id)
 
+    def save(self, *args, **kwargs):
+        buyer = self.buyer
+        buyer.credit -= self.total_price
+        with transaction.atomic():
+            buyer.save()
+            super().save(*args, **kwargs)
+
+    class Meta:
+        verbose_name = 'پرداخت'
+        verbose_name_plural = 'پرداخت‌ها'
