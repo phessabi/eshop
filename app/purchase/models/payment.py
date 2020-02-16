@@ -2,6 +2,8 @@ from datetime import datetime
 
 from django.db import models, transaction
 
+from purchase.models import Order
+
 
 class Payment(models.Model):
 
@@ -32,9 +34,12 @@ class Payment(models.Model):
     def save(self, *args, **kwargs):
         buyer = self.buyer
         buyer.credit -= self.total_price
+        order = self.order
+        order.status = Order.PAID
         with transaction.atomic():
             buyer.save()
             super().save(*args, **kwargs)
+            order.save()
 
     class Meta:
         verbose_name = 'پرداخت'
