@@ -3,9 +3,12 @@ from phonenumber_field.modelfields import PhoneNumberField
 
 
 class Order(models.Model):
+    PENDING = 1
+    PAID = 2
+
     STATUS_CHOICES = [
-        (1, 'در انتظار'),
-        (2, 'پرداخت شده')
+        (PENDING, 'در انتظار'),
+        (PAID, 'پرداخت شده')
     ]
 
     buyer = models.ForeignKey(
