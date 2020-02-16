@@ -1,15 +1,15 @@
-from rest_framework.authentication import TokenAuthentication
+from rest_framework import status
+from rest_framework.parsers import FormParser, MultiPartParser
 from rest_framework.permissions import IsAuthenticated
+from rest_framework.response import Response
 from rest_framework.viewsets import ModelViewSet
-from rest_framework_simplejwt.authentication import JWTAuthentication
 
 from _helpers.permissions import IsVendor
 from products.models import Product
-from products.serializers import ProductSerializer
+from products.serializers import ProductSerializer, ImageSerializer
 
 
 class VendorProductViewSet(ModelViewSet):
-    authentication_classes = (JWTAuthentication, TokenAuthentication)
     permission_classes = (IsAuthenticated, IsVendor)
     serializer_class = ProductSerializer
     queryset = Product.objects.all()
@@ -26,6 +26,15 @@ class VendorProductViewSet(ModelViewSet):
             archived=False
         )
 
-    # def perform_destroy(self, instance: Product):
-    #     instance.archived = True
-    #     instance.save()
+
+class ImageViewSet(ModelViewSet):
+    permission_classes = (IsAuthenticated, IsVendor)
+    serializer_class = ImageSerializer
+    queryset = Product.objects.all()
+    parser_classes = (MultiPartParser, FormParser,)
+
+    def update(self, request, *args, **kwargs):
+        instance = self.get_object()
+        instance.image = self.request.data.get('image')
+        instance.save()
+        return Response(status=status.HTTP_200_OK)

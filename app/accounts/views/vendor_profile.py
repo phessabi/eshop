@@ -30,7 +30,7 @@ class ListRetrieveVendorViewSet(GenericViewSet, ListAPIView, RetrieveAPIView):
     serializer_class = VendorSerializer
 
 
-class UpdateRetrieveVendorViewSet(GenericViewSet, UpdateAPIView, RetrieveAPIView):
+class UpdateRetrieveVendorViewSet(GenericViewSet, UpdateAPIView, RetrieveAPIView, ListAPIView):
     permission_classes = (IsAuthenticated,)
     queryset = Vendor.objects.all()
     serializer_class = VendorProfileSerializer

@@ -176,11 +176,8 @@ class PurchaseAPITestCase(TestCase):
                                content_type='application/json')
 
         order_id = response.data.get('id')
-        order = Order.objects.get(id=order_id)
         data = {
-            'order': order_id,
-            'buyer': self.buyer.id,
-            'total_price': order.total_price
+            'order': order_id
         }
         response = client.post('/purchase/payment/',
                                json.dumps(data),

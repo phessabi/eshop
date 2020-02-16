@@ -36,6 +36,7 @@ class CartViewSet(ModelViewSet):
         product = Product.objects.get(id=product_id)
         instance = self.get_object()
         instance.products.add(product)
+        instance.save()
         return Response(status=status.HTTP_200_OK)
 
 

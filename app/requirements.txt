@@ -4,10 +4,11 @@ chardet==3.0.4
 coreapi==2.3.3
 coreschema==0.0.4
 coverage==5.0.3
-Django==2.2.10
+Django==2.2.8
 django-cors-headers==3.2.0
 django-cors-middleware==1.5.0
 django-filter==2.2.0
+django-jet==1.0.8
 django-phonenumber-field==4.0.0
 djangorestframework==3.11.0
 djangorestframework-simplejwt==4.4.0
@@ -17,7 +18,6 @@ inflection==0.3.1
 itypes==1.1.0
 Jinja2==2.11.1
 MarkupSafe==1.1.1
-numpy==1.18.1
 packaging==20.1
 phonenumbers==8.11.1
 Pillow==6.1.0
