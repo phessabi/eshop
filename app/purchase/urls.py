@@ -1,7 +1,8 @@
 from django.urls import path, include
 from rest_framework import routers
 
-from purchase.views import CartViewSet, OrderViewSet, AddToCartView, DateView, PhoneAddressView, PaymentView
+from purchase.views import CartViewSet, OrderViewSet, AddToCartView, DateView, PhoneAddressView, PaymentView, \
+    CampaignCreateAPIView
 
 router = routers.DefaultRouter()
 router.register('cart', CartViewSet)
@@ -12,5 +13,6 @@ router.register('payment', PaymentView)
 
 urlpatterns = [
     path('date/', DateView.as_view(), name='date'),
-    path('', include(router.urls))
+    path('campaigns/', CampaignCreateAPIView.as_view()),
+    path('', include(router.urls)),
 ]
