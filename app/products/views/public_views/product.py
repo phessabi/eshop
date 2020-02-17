@@ -44,4 +44,4 @@ class ListProductViewSet(GenericViewSet, ListModelMixin, RetrieveModelMixin):
                 queryset = queryset.order_by('-express', 'price')
             else:
                 queryset = queryset.order_by('-express', '-price')
-        return queryset
+        return queryset.filter(vendor__active=True)
