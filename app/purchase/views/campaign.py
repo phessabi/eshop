@@ -24,6 +24,12 @@ class CampaignViewSet(CreateModelMixin,
         print(type(data['start_datetime']))
         print(data['end_datetime'])
         print(type(data['end_datetime']))
+        data['start_datetime'] = data['start_datetime'].replace('T20:30:00.000Z', '')
+        data['end_datetime'] = data['end_datetime'].replace('T20:30:00.000Z', '')
+        print(data['start_datetime'])
+        print(type(data['start_datetime']))
+        print(data['end_datetime'])
+        print(type(data['end_datetime']))
         data['sale_amount'] = data['sale_amount'] / 100
         serializer = self.get_serializer(data=request.data)
         serializer.is_valid(raise_exception=True)
