@@ -17,9 +17,6 @@ Enhancement suggestions are tracked as [GitHub issues](https://github.com/phessa
 
 Eshop can be developed locally. For instructions on how to do this, see the following sections in the [Eshop Installation Guide](https://github.com/phessabi/eshop#installation):
 
-* [Hacking on Eshop Core][hacking-on-Eshop-core]
-* [Contributing to Official Eshop Packages][contributing-to-official-Eshop-packages]
-
 ### Pull Requests
 
 The process described here has several goals:

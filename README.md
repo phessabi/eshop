@@ -95,6 +95,8 @@ Online shopping website: http://194.5.192.129:4200/home
 + ##### Developers
     + You can send pull requests to this repository. We will check them ASAP.
     
+    more details and guidelines on **[contributing section](CONTRIBUTING.md)**
+    
 ## Credits
 + Special Thanks to:
     + **[Milad CheraghaliKhani]()** as Owner
