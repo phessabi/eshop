@@ -15,7 +15,7 @@ class Product(models.Model):
     )
 
     image = models.ImageField(
-        upload_to='resources/images/products',
+        upload_to='',
         null=True,
         blank=True,
         verbose_name='تصویر'
