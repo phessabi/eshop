@@ -18,16 +18,16 @@ class PurchaseAPITestCase(TestCase):
         user1 = User.objects.create(username='user_1')
         user1.set_password('1234')
         user1.save()
-        vendor = Vendor.objects.create(user=user1, name='vendor_1')
+        self.vendor = Vendor.objects.create(user=user1, name='vendor_1')
         user2 = User.objects.create(username='user_2')
         user2.set_password('1234')
         user2.save()
         cart = Cart.objects.create()
         self.buyer = Buyer.objects.create(user=user2, name='buyer_1', cart=cart)
         category = Category.objects.create(name='cat_1', level=1)
-        self.product1 = Product.objects.create(title='product_1', category=category, price=500, vendor=vendor)
-        self.product2 = Product.objects.create(title='product_2', category=category, price=500, vendor=vendor)
-        self.product3 = Product.objects.create(title='product_3', category=category, price=500, vendor=vendor)
+        self.product1 = Product.objects.create(title='product_1', category=category, price=500, vendor=self.vendor)
+        self.product2 = Product.objects.create(title='product_2', category=category, price=500, vendor=self.vendor)
+        self.product3 = Product.objects.create(title='product_3', category=category, price=500, vendor=self.vendor)
 
     def test_add_to_cart(self):
         response = self.client.post('/accounts/token/',
@@ -198,3 +198,21 @@ class PurchaseAPITestCase(TestCase):
 
         response = client.get('/purchase/payment/')
         self.assertEqual(len(response.data), 1)
+
+    def test_campaign_definition(self):
+        response = self.client.post('/accounts/token/',
+                                    {'username': self.vendor.user.username, 'password': '1234'},
+                                    content_type='application/json')
+        token = response.data['access']
+        client = APIClient()
+        client.credentials(HTTP_AUTHORIZATION='Bearer ' + token)
+        data = {
+            'sale_amount': 20,
+            'start_datetime': '2020-02-20',
+            'end_datetime': '2020-02-25'
+        }
+        response = client.post('/purchase/campaigns/',
+                               json.dumps(data),
+                               content_type='application/json')
+
+        self.assertEqual(response.status_code, 201)

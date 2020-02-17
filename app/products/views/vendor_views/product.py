@@ -33,6 +33,10 @@ class ImageViewSet(ModelViewSet):
     queryset = Product.objects.all()
     parser_classes = (MultiPartParser, FormParser,)
 
+    def get_queryset(self):
+        queryset = Product.objects.all().order_by('-express')
+        return queryset
+
     def update(self, request, *args, **kwargs):
         instance = self.get_object()
         instance.image = self.request.data.get('image')

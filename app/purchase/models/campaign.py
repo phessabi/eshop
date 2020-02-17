@@ -11,11 +11,11 @@ class Campaign(models.Model):
         verbose_name='فروشنده'
     )
 
-    start_datetime = models.DateTimeField(
+    start_datetime = models.DateField(
         verbose_name='زمان شروع'
     )
 
-    end_datetime = models.DateTimeField(
+    end_datetime = models.DateField(
         verbose_name='زمان پایان'
     )
 
