@@ -55,6 +55,14 @@ class Order(models.Model):
             total_price += product.price_after_sale
         return total_price
 
+    def affect_commission(self):
+        for product in self.products.all():
+            vendor = product.vendor
+            price = product.price_after_sale
+            system_share = price * vendor.commission
+            vendor.credit -= system_share
+            vendor.save()
+
     def __str__(self):
         return str(self.id)
 

@@ -39,6 +39,7 @@ class Payment(models.Model):
         with transaction.atomic():
             buyer.save()
             super().save(*args, **kwargs)
+            order.affect_commission()
             order.save()
 
     class Meta:
