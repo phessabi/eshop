@@ -7,5 +7,5 @@ class VendorProfileSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Vendor
-        fields = ('id', 'name', 'credit')
-
+        fields = ('id', 'name', 'credit', 'commission')
+        read_only_fields = ('id', 'commission')
