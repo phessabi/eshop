@@ -11,19 +11,14 @@ class ProductSerializer(serializers.ModelSerializer):
     category_name = serializers.SerializerMethodField()
     vendor_name = serializers.SerializerMethodField()
     campaign = CampaignSerializer(source='vendor.campaign', read_only=True, allow_null=True)
-    image_name = serializers.SerializerMethodField()
 
     class Meta:
         model = Product
         fields = (
             'id', 'title', 'category', 'category_name', 'price', 'price_after_sale', 'express', 'specifications',
-            'vendor', 'vendor_name', 'campaign', 'image_name'
+            'vendor', 'vendor_name', 'campaign', 'image'
         )
         read_only_fields = ('id', 'specifications', 'price_after_sale', 'campaign', 'category_name', 'vendor_name')
-
-    @staticmethod
-    def get_image_name(instance: Product):
-        return os.path.basename(instance.image.name)
 
     @staticmethod
     def get_category_name(instance: Product):
