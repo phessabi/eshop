@@ -5,6 +5,7 @@ from rest_framework.response import Response
 from rest_framework.viewsets import GenericViewSet
 
 from _helpers.permissions import IsBuyer
+from _helpers.throttles import BurstAnonRateThrottle, SustainedAnonRateThrottle
 from accounts.models import Buyer
 from accounts.serializers import UserSerializer, BuyerProfileSerializer
 from purchase.models import Cart
@@ -12,6 +13,7 @@ from purchase.models import Cart
 
 class CreateBuyerViewSet(GenericViewSet, CreateAPIView):
     permission_classes = (AllowAny,)
+    throttle_classes = (BurstAnonRateThrottle, SustainedAnonRateThrottle,)
     queryset = Buyer.objects.all()
     serializer_class = UserSerializer
 
