@@ -21,7 +21,7 @@ class Product(models.Model):
         verbose_name='تصویر'
     )
 
-    price = models.IntegerField(
+    price_before_sale = models.IntegerField(
         verbose_name='قیمت'
     )
 
@@ -47,8 +47,8 @@ class Product(models.Model):
     def price_after_sale(self):
         campaign = getattr(self.vendor, 'campaign', None)
         if campaign is None:
-            return self.price
-        return self.price * (1 - campaign.sale_amount)
+            return self.price_before_sale
+        return self.price_before_sale * (1 - campaign.sale_amount)
 
     class Meta:
         verbose_name = 'محصول'

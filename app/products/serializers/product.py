@@ -15,10 +15,10 @@ class ProductSerializer(serializers.ModelSerializer):
     class Meta:
         model = Product
         fields = (
-            'id', 'title', 'category', 'category_name', 'price', 'price_after_sale', 'express', 'specifications',
+            'id', 'title', 'category', 'category_name', 'price_before_sale', 'price', 'express', 'specifications',
             'vendor', 'vendor_name', 'campaign', 'image'
         )
-        read_only_fields = ('id', 'specifications', 'price_after_sale', 'campaign', 'category_name', 'vendor_name')
+        read_only_fields = ('id', 'specifications', 'price_before_sale', 'campaign', 'category_name', 'vendor_name')
 
     @staticmethod
     def get_category_name(instance: Product):

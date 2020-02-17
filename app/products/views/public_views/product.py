@@ -43,7 +43,7 @@ class ListProductViewSet(GenericViewSet, ListModelMixin, RetrieveModelMixin):
             queryset = Product.objects.filter(category_id__in=category_ids).order_by('-express')
         if sort_price is not None:
             if sort_price == 'ascending':
-                queryset = queryset.order_by('-express', 'price')
+                queryset = queryset.order_by('-express', 'price_before_sale')
             else:
                 queryset = queryset.order_by('-express', '-price')
         return queryset.filter(vendor__active=True)

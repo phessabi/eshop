@@ -44,17 +44,17 @@ class Order(models.Model):
     )
 
     @property
+    def total_price_before_sale(self):
+        total_price = 0
+        for product in self.products.all():
+            total_price += product.price_before_sale
+        return total_price
+
+    @property
     def total_price(self):
         total_price = 0
         for product in self.products.all():
             total_price += product.price
-        return total_price
-
-    @property
-    def total_price_after_sale(self):
-        total_price = 0
-        for product in self.products.all():
-            total_price += product.price_after_sale
         return total_price
 
     def affect_commission(self):
@@ -63,7 +63,7 @@ class Order(models.Model):
                 vendor=product.vendor,
                 buyer=self.buyer,
                 product=product,
-                amount=product.price_after_sale,
+                amount=product.price,
             )
 
     def __str__(self):
