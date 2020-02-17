@@ -63,7 +63,7 @@ class AccountAPITestCase(TestCase):
 
     def test_charging(self):
         response = self.client.post('/accounts/token/',
-                                    {'username': self.user2.username, 'password': '1234'},
+                                    {'username': self.user1.username, 'password': '1234'},
                                     content_type='application/json')
 
         token = response.data['access']
@@ -71,16 +71,16 @@ class AccountAPITestCase(TestCase):
         client.credentials(HTTP_AUTHORIZATION='Bearer ' + token)
 
         data = {
-            'user': self.user2.id,
             'amount': 12000
         }
         response = client.post('/accounts/charge/',
                                json.dumps(data),
                                content_type='application/json')
         self.assertEqual(response.status_code, 201)
-        user_id = response.data.get('user')
-        user = User.objects.get(id=user_id)
-        credit = user.buyer.credit
+
+        response = client.get('/accounts/vendor-profile/')
+        self.assertEqual(response.status_code, 200)
+        credit = response.data[0].get('credit')
         self.assertEqual(credit, 12000)
 
     def test_listing_transactions(self):

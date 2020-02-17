@@ -29,11 +29,9 @@ class ChargeView(ListCreateAPIView, GenericViewSet):
             user.vendor.credit += charge.amount
             user.vendor.save()
             user.save()
-            print('vendor', str(user.vendor.credit))
-        else:
+        elif hasattr(user, 'buyer'):
             user.buyer.credit += charge.amount
             user.buyer.save()
             user.save()
-            print('buyer', str(user.buyer.credit))
         headers = self.get_success_headers(serializer.data)
         return Response(serializer.data, status=status.HTTP_201_CREATED, headers=headers)
