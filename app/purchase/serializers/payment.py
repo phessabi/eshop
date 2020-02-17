@@ -17,10 +17,3 @@ class PaymentSerializer(serializers.ModelSerializer):
         data['total_price'] = order.total_price
         return super().to_internal_value(data)
 
-    def validate(self, attrs):
-        validated_data = super().validate(attrs)
-        buyer = validated_data['buyer']
-        total_price = validated_data['total_price']
-        if buyer.credit < total_price:
-            raise serializers.ValidationError('اعتبار کافی برای پرداخت موجود نیست.')
-        return validated_data

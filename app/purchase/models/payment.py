@@ -32,12 +32,9 @@ class Payment(models.Model):
         return str(self.id)
 
     def save(self, *args, **kwargs):
-        buyer = self.buyer
-        buyer.credit -= self.total_price
         order = self.order
         order.status = Order.PAID
         with transaction.atomic():
-            buyer.save()
             super().save(*args, **kwargs)
             order.affect_commission()
             order.save()
