@@ -34,7 +34,7 @@ class ImageViewSet(ModelViewSet):
     parser_classes = (MultiPartParser, FormParser,)
 
     def update(self, request, *args, **kwargs):
-        print(request)
+        print(request.data)
         instance = self.get_object()
         instance.image = self.request.data.get('image')
         instance.save()
