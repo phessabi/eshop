@@ -1,3 +1,5 @@
+import os
+
 from rest_framework import serializers
 from products.models import Product
 from products.serializers.specification import SpecificationSerializer
@@ -21,7 +23,7 @@ class ProductSerializer(serializers.ModelSerializer):
 
     @staticmethod
     def get_image_name(instance: Product):
-        return instance.image.name.split('resources/images/products/')[1]
+        return os.path.basename(instance.image.name)
 
     @staticmethod
     def get_category_name(instance: Product):
