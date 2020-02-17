@@ -4,6 +4,7 @@ from rest_framework.permissions import AllowAny, IsAuthenticated
 from rest_framework.response import Response
 from rest_framework.viewsets import GenericViewSet
 
+from _helpers.permissions import IsVendor
 from accounts.models import Vendor
 from accounts.serializers import UserSerializer, VendorProfileSerializer
 from accounts.serializers import VendorSerializer
@@ -31,7 +32,7 @@ class ListRetrieveVendorViewSet(GenericViewSet, ListAPIView, RetrieveAPIView):
 
 
 class UpdateRetrieveVendorViewSet(GenericViewSet, UpdateAPIView, RetrieveAPIView, ListAPIView):
-    permission_classes = (IsAuthenticated,)
+    permission_classes = (IsAuthenticated, IsVendor)
     queryset = Vendor.objects.all()
     serializer_class = VendorProfileSerializer
 

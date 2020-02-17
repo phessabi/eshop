@@ -4,6 +4,7 @@ from rest_framework.permissions import AllowAny, IsAuthenticated
 from rest_framework.response import Response
 from rest_framework.viewsets import GenericViewSet
 
+from _helpers.permissions import IsBuyer
 from accounts.models import Buyer
 from accounts.serializers import UserSerializer, BuyerProfileSerializer
 from purchase.models import Cart
@@ -26,7 +27,7 @@ class CreateBuyerViewSet(GenericViewSet, CreateAPIView):
 
 
 class UpdateRetrieveBuyerViewSet(GenericViewSet, UpdateAPIView, RetrieveAPIView, ListAPIView):
-    permission_classes = (IsAuthenticated,)
+    permission_classes = (IsAuthenticated, IsBuyer)
     serializer_class = BuyerProfileSerializer
     queryset = Buyer.objects.all()
 
