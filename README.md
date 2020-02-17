@@ -5,6 +5,8 @@ Online shopping [website](http://194.5.192.129:4200/home).
 
 ## Table of Contents
   + [Installation](#installation)
+    + [Backend](#backend)
+    + [Frontend](#frontend)
   + [Production](#production)
 
 ---
