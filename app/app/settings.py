@@ -157,7 +157,7 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
-MEDIA_URL = '/resources/images/products/'
-MEDIA_ROOT = os.path.join(BASE_DIR, '/resources/images/products/')
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, '../resources/images/products/')
 
 JET_SIDE_MENU_COMPACT = True
