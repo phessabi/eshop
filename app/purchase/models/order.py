@@ -1,6 +1,8 @@
 from django.db import models
 from phonenumber_field.modelfields import PhoneNumberField
 
+from purchase.models import VendorPayment
+
 
 class Order(models.Model):
     PENDING = 1
@@ -54,6 +56,15 @@ class Order(models.Model):
         for product in self.products.all():
             total_price += product.price_after_sale
         return total_price
+
+    def affect_commission(self):
+        for product in self.products.all():
+            VendorPayment.objects.create(
+                vendor=product.vendor,
+                buyer=self.buyer,
+                product=product,
+                amount=product.price_after_sale,
+            )
 
     def __str__(self):
         return str(self.id)

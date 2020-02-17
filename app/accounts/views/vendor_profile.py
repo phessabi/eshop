@@ -4,6 +4,8 @@ from rest_framework.permissions import AllowAny, IsAuthenticated
 from rest_framework.response import Response
 from rest_framework.viewsets import GenericViewSet
 
+from _helpers.permissions import IsVendor
+from _helpers.throttles import SustainedAnonRateThrottle, BurstAnonRateThrottle
 from accounts.models import Vendor
 from accounts.serializers import UserSerializer, VendorProfileSerializer
 from accounts.serializers import VendorSerializer
@@ -11,6 +13,7 @@ from accounts.serializers import VendorSerializer
 
 class CreateVendorViewSet(GenericViewSet, CreateAPIView):
     permission_classes = (AllowAny,)
+    throttle_classes = (BurstAnonRateThrottle, SustainedAnonRateThrottle,)
     queryset = Vendor.objects.all()
     serializer_class = UserSerializer
 
@@ -26,12 +29,13 @@ class CreateVendorViewSet(GenericViewSet, CreateAPIView):
 
 class ListRetrieveVendorViewSet(GenericViewSet, ListAPIView, RetrieveAPIView):
     permission_classes = (AllowAny,)
+    throttle_classes = (BurstAnonRateThrottle, SustainedAnonRateThrottle,)
     queryset = Vendor.objects.all()
     serializer_class = VendorSerializer
 
 
 class UpdateRetrieveVendorViewSet(GenericViewSet, UpdateAPIView, RetrieveAPIView, ListAPIView):
-    permission_classes = (IsAuthenticated,)
+    permission_classes = (IsAuthenticated, IsVendor)
     queryset = Vendor.objects.all()
     serializer_class = VendorProfileSerializer
 

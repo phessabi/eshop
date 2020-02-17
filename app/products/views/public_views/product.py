@@ -3,6 +3,7 @@ from rest_framework.mixins import ListModelMixin, RetrieveModelMixin
 from rest_framework.permissions import AllowAny
 from rest_framework.viewsets import GenericViewSet
 
+from _helpers.throttles import SustainedAnonRateThrottle, BurstAnonRateThrottle
 from products.models import Product, Category
 from products.serializers import ProductSerializer
 
@@ -26,6 +27,7 @@ def list_all_products(category):
 
 class ListProductViewSet(GenericViewSet, ListModelMixin, RetrieveModelMixin):
     permission_classes = (AllowAny,)
+    throttle_classes = (BurstAnonRateThrottle, SustainedAnonRateThrottle,)
     queryset = Product.objects.all()
     serializer_class = ProductSerializer
     filter_backends = [filters.SearchFilter]
@@ -44,4 +46,4 @@ class ListProductViewSet(GenericViewSet, ListModelMixin, RetrieveModelMixin):
                 queryset = queryset.order_by('-express', 'price')
             else:
                 queryset = queryset.order_by('-express', '-price')
-        return queryset
+        return queryset.filter(vendor__active=True)
