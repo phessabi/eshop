@@ -37,4 +37,5 @@ class ImageViewSet(ModelViewSet):
         instance = self.get_object()
         instance.image = self.request.data.get('image')
         instance.save()
+        print(instance.image)
         return Response(status=status.HTTP_200_OK)
