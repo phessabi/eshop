@@ -9,4 +9,4 @@ git -C $1 pull
 docker-compose -f $1/docker-compose.yml down
 docker-compose -f $1/docker-compose.yml up --exit-code-from migrate --build
 #docker-compose -f $1/docker-compose.yml run migrate
-#docker-compose -f $1/docker-compose.yml up -d app
+docker-compose -f $1/docker-compose.yml up -d app

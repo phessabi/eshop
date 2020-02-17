@@ -1,6 +1,0 @@
-#!/bin/bash
-
-set -e
-set -o pipefail
-
-docker-compose -f $1/docker-compose.yml up -d app

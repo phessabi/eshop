@@ -52,13 +52,11 @@ pipeline
         success
         {
             echo 'Passed! Deploying Changes...'
-            sh '$(pwd)/run ${PRODUCT_PATH}'
 
         }
         failure
         {
             echo 'Failed! Ignoring Changes...'
-            sh '$(pwd)/discard ${PRODUCT_PATH}'
         }
     }
 }
