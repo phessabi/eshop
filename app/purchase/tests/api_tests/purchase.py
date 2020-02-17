@@ -176,19 +176,12 @@ class PurchaseAPITestCase(TestCase):
         data = {
             'order': order_id
         }
-        response = client.post('/purchase/payment/',
-                               json.dumps(data),
-                               content_type='application/json')
-
-        self.assertEqual(response.status_code, 400)
         self.buyer.credit = 2000
         self.buyer.save()
         response = client.post('/purchase/payment/',
                                json.dumps(data),
                                content_type='application/json')
         self.assertEqual(response.status_code, 201)
-        self.buyer = Buyer.objects.get(id=self.buyer.id)
-        self.assertEqual(self.buyer.credit, 1500)
 
         response = client.get('/purchase/order/')
         self.assertEqual(len(response.data), 1)
