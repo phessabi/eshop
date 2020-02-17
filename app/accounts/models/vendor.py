@@ -1,3 +1,4 @@
+from django.core.validators import MinValueValidator, MaxValueValidator
 from django.db import models
 
 
@@ -25,9 +26,30 @@ class Vendor(models.Model):
         verbose_name='اعتبار'
     )
 
-    class Meta:
-        verbose_name = 'فروشنده'
-        verbose_name_plural = 'فروشندگان'
+    commission = models.FloatField(
+        validators=(MinValueValidator(0), MaxValueValidator(1)),
+        default=0.2,
+        verbose_name='مقدار کمیسیون'
+    )
+
+    active = models.BooleanField(
+        default=True,
+        verbose_name='فعال'
+    )
+
+    def save(self, *args, **kwargs):
+        old_object = Vendor.objects.get(id=self.id) if self.id else None
+
+        if old_object:
+            if not old_object.active and self.credit > 0:
+                self.active = True
+            elif old_object.active and self.credit < 0:
+                self.active = False
+        super().save(*args, **kwargs)
 
     def __str__(self):
         return self.name
+
+    class Meta:
+        verbose_name = 'فروشنده'
+        verbose_name_plural = 'فروشندگان'
