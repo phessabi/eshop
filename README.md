@@ -1,13 +1,14 @@
-# [Eshop](http://194.5.192.129:4200/home) [![Build Status](https://travis-ci.com/phessabi/eshop.svg?branch=master)](https://travis-ci.com/phessabi/eshop) ![Alt text](./cover.svg)
+# [Eshop](http://194.5.192.129:4200/home) [![Build Status](https://travis-ci.com/phessabi/eshop.svg?branch=master)](https://travis-ci.com/phessabi/eshop) ![Alt text](pictures/cover.svg)
 
 
 Online shopping [website](http://194.5.192.129:4200/home).
 
 ## Table of Contents
-  + [Installation](#installation)
-    + [Backend](#backend)
-    + [Frontend](#frontend)
-  + [Production](#production)
+  + **[Installation](#installation)**
+    + **[Backend](#backend)**
+    + **[Frontend](#frontend)**
+  + **[Production](#production)**
+  + **[Usage](#usage)**
 
 ---
 
@@ -61,7 +62,7 @@ Online shopping [website](http://194.5.192.129:4200/home).
         ```
         agile-front-end/src/app/features/api-management/services/http/http.service.ts
         ```
-        ![Alt text](./Http-service.png)
+        ![Alt text](pictures/Http-service.png)
     1. Build the angular image
         ```
         npm install -save
@@ -77,4 +78,7 @@ Online shopping [website](http://194.5.192.129:4200/home).
 
 ## Production
 
-The application is currently running [here](http://194.5.192.129:4200/home)
++ The application is currently running [here](http://194.5.192.129:4200/home)
+
+## Usage
+
