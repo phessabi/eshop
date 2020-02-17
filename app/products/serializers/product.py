@@ -21,7 +21,7 @@ class ProductSerializer(serializers.ModelSerializer):
 
     @staticmethod
     def get_image_name(instance: Product):
-        return instance.image.name
+        return instance.image.name.split('resources/images/products/')[1]
 
     @staticmethod
     def get_category_name(instance: Product):
