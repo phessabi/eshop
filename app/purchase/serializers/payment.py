@@ -14,7 +14,7 @@ class PaymentSerializer(serializers.ModelSerializer):
         data['buyer'] = buyer_id
 
         order = Order.objects.get(id=data['order'])
-        data['total_price'] = order.total_price_after_sale
+        data['total_price'] = order.total_price
         return super().to_internal_value(data)
 
     def validate(self, attrs):

@@ -25,9 +25,9 @@ class PurchaseAPITestCase(TestCase):
         cart = Cart.objects.create()
         self.buyer = Buyer.objects.create(user=user2, name='buyer_1', cart=cart)
         category = Category.objects.create(name='cat_1', level=1)
-        self.product1 = Product.objects.create(title='product_1', category=category, price=500, vendor=self.vendor)
-        self.product2 = Product.objects.create(title='product_2', category=category, price=500, vendor=self.vendor)
-        self.product3 = Product.objects.create(title='product_3', category=category, price=500, vendor=self.vendor)
+        self.product1 = Product.objects.create(title='product_1', category=category, price_before_sale=500, vendor=self.vendor)
+        self.product2 = Product.objects.create(title='product_2', category=category, price_before_sale=500, vendor=self.vendor)
+        self.product3 = Product.objects.create(title='product_3', category=category, price_before_sale=500, vendor=self.vendor)
 
     def test_add_to_cart(self):
         response = self.client.post('/accounts/token/',

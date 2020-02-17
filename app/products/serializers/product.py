@@ -1,5 +1,3 @@
-import os
-
 from rest_framework import serializers
 from products.models import Product
 from products.serializers.specification import SpecificationSerializer
@@ -18,7 +16,7 @@ class ProductSerializer(serializers.ModelSerializer):
             'id', 'title', 'category', 'category_name', 'price_before_sale', 'price', 'express', 'specifications',
             'vendor', 'vendor_name', 'campaign', 'image'
         )
-        read_only_fields = ('id', 'specifications', 'price_before_sale', 'campaign', 'category_name', 'vendor_name')
+        read_only_fields = ('id', 'specifications', 'price', 'campaign', 'category_name', 'vendor_name')
 
     @staticmethod
     def get_category_name(instance: Product):

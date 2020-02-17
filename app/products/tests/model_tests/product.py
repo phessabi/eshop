@@ -15,9 +15,9 @@ class ProductModelTestCase(TestCase):
         self.category2 = Category.objects.create(name='cat_2', level=2, parent_category=self.category1)
         self.category3 = Category.objects.create(name='cat_3', level=3, parent_category=self.category2)
         self.category4 = Category.objects.create(name='cat_3', level=1)
-        Product.objects.create(title='product_1', category=self.category3, price=500, vendor=vendor)
-        Product.objects.create(title='product_2', category=self.category3, price=500, vendor=vendor)
-        Product.objects.create(title='product_3', category=self.category4, price=500, vendor=vendor)
+        Product.objects.create(title='product_1', category=self.category3, price_before_sale=500, vendor=vendor)
+        Product.objects.create(title='product_2', category=self.category3, price_before_sale=500, vendor=vendor)
+        Product.objects.create(title='product_3', category=self.category4, price_before_sale=500, vendor=vendor)
 
     def test_product_database(self):
         self.assertEqual(Product.objects.count(), 3)

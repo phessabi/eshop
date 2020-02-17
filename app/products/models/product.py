@@ -44,7 +44,7 @@ class Product(models.Model):
     )
 
     @property
-    def price_after_sale(self):
+    def price(self):
         campaign = getattr(self.vendor, 'campaign', None)
         if campaign is None:
             return self.price_before_sale
