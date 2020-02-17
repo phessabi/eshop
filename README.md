@@ -1,16 +1,20 @@
 # [Eshop](http://194.5.192.129:4200/home) [![Build Status](https://travis-ci.com/phessabi/eshop.svg?branch=master)](https://travis-ci.com/phessabi/eshop) ![Alt text](pictures/cover.svg)
 
 
-Online shopping [website](http://194.5.192.129:4200/home).
+Online shopping website: http://194.5.192.129:4200/home
+
 
 ## Table of Contents
-  + **[Installation](#installation)**
-    + **[Backend](#backend)**
-    + **[Frontend](#frontend)**
-  + **[Production](#production)**
-  + **[Usage](#usage)**
+1. **[Installation](#installation)**
+    + [Backend](#backend)
+    + [Frontend](#frontend)
+1. **[Production](#production)**
+1. **[Usage](#usage)**
+1. **[Contributing](#contributing)**
+    + [End Users](#end-users)
+    + [Developers](#developers)
+1. **[Credits](#credits)**
 
----
 
 ## Installation
 1. Install [Docker](https://phoenixnap.com/kb/how-to-install-docker-on-ubuntu-18-04) 
@@ -82,3 +86,19 @@ Online shopping [website](http://194.5.192.129:4200/home).
 
 ## Usage
 
++ Checkout [Wiki](https://github.com/phessabi/eshop/wiki)
+ 
+## Contributing
++ ##### End Users
+    + Send us your recommendations and bug reports in the [issues section](https://github.com/phessabi/eshop/issues)
+
++ ##### Developers
+    + You can send pull requests to this repository. We will check them ASAP.
+    
+## Credits
++ Special Thanks to:
+    + **[Milad CheraghaliKhani]()** as Owner
+    + **[Ruhollah Sekaleshfar](www.github.com/RuhollahSeka)** as Backend Developer
+    + **[Hossein Keshavarz](www.github.com/hossein-kshvrz)** as Backend Developer
+    + **[Pedram Abdzadeh](www.github.com/pedramabdzadeh)** as Frontend Developer
+    + **[Parham Hessabi](www.github.com/phessabi)** as Devops & Config Manager
