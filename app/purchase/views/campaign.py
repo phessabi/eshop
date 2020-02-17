@@ -1,9 +1,6 @@
-from rest_framework.authentication import TokenAuthentication
-from rest_framework.generics import CreateAPIView
 from rest_framework.mixins import CreateModelMixin, UpdateModelMixin, DestroyModelMixin
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.viewsets import GenericViewSet
-from rest_framework_simplejwt.authentication import JWTAuthentication
 
 from _helpers.permissions import IsVendor
 from purchase.models import Campaign

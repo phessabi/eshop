@@ -1,11 +1,13 @@
 from django.urls import path, include
 from rest_framework import routers
 
-from products.views import ListProductViewSet, VendorProductViewSet, ListCategoryView, AdminCategoryViewSet, ExpressView
+from products.views import ListProductViewSet, VendorProductViewSet, ListCategoryView, AdminCategoryViewSet, \
+    ExpressView, ImageViewSet
 
 router = routers.DefaultRouter()
 router.register('list-products', ListProductViewSet)
 router.register('vendor-product', VendorProductViewSet)
+router.register('image', ImageViewSet)
 router.register('list-categories', ListCategoryView)
 router.register('admin-category', AdminCategoryViewSet)
 router.register('express', ExpressView)
